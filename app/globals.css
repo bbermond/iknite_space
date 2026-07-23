@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Ink & paper: monochrome technical base ---- */
+  --color-paper: #f4f3ef;
+  --color-paper-2: #edebe4;
+  --color-ink: #16150f;
+  --color-ink-soft: #4a4941;
+
+  /* ---- Iknite ember accents ----
+     ember      : bright — decorative only (fills, borders, bullets, gradient washes, large display text)
+     ember-ink  : accessible burnt ember for SMALL TEXT on paper and for button fills
+                  (≈5:1 on paper — passes WCAG AA 4.5:1)
+     ember-deep : darker still, for hover states                                              */
+  --color-ember: #ff4d00;
+  --color-ember-ink: #bf360c;
+  --color-ember-deep: #a32e00;
+  --color-ember-soft: #ffb25e;
+  --color-flare: #ff7a45;
+
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-blink: blink 1.1s step-end infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-ember-ink);
+  color: var(--color-paper);
+}
+
+/* Ember as TEXT resolves to the accessible burnt shade; bright ember stays
+   for backgrounds, borders, bullets, and washes (bg-ember / border-ember). */
+.text-ember {
+  color: var(--color-ember-ink);
+}
+
+/* ---- Hairline rules (the structural grid) ---- */
+.hairline { border-color: color-mix(in srgb, var(--color-ink) 14%, transparent); }
+.hairline-strong { border-color: color-mix(in srgb, var(--color-ink) 32%, transparent); }
+
+/* ---- Dot field: engineering-paper background ---- */
+.dot-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-ink) 22%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+.dot-grid-fade {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+}
+
+/* ---- Soft ember washes: Iknite warmth over the mono base ---- */
+.wash-ember {
+  background:
+    radial-gradient(90% 70% at 85% 0%, color-mix(in srgb, var(--color-ember) 13%, transparent), transparent 62%),
+    radial-gradient(70% 55% at 8% 100%, color-mix(in srgb, var(--color-ember-soft) 16%, transparent), transparent 60%);
+}
+.wash-ember-strong {
+  background:
+    radial-gradient(110% 90% at 80% 10%, color-mix(in srgb, var(--color-ember) 26%, transparent), transparent 64%),
+    radial-gradient(90% 70% at 10% 95%, color-mix(in srgb, var(--color-ember-soft) 30%, transparent), transparent 62%),
+    var(--color-paper-2);
+}
+.wash-ink {
+  background:
+    radial-gradient(100% 80% at 85% 0%, color-mix(in srgb, var(--color-ember) 18%, transparent), transparent 55%),
+    var(--color-ink);
+}
+
+/* ---- Text utilities ---- */
+.micro {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ---- Reveal-on-scroll (driven by Reveal component) ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Interactions ---- */
+.invert-hover {
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.invert-hover:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.ember-hover {
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.ember-hover:hover {
+  background: var(--color-ember-ink);
+  border-color: var(--color-ember-ink);
+  color: var(--color-paper);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-ember-ink);
+  outline-offset: 2px;
+}
+
+/* ---- Marquee ---- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: var(--animate-marquee);
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* ---- Forms ---- */
+.field {
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 50%, transparent);
+  background: var(--color-paper);
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-ink);
+}
+.field::placeholder { color: color-mix(in srgb, var(--color-ink) 62%, transparent); }
+.field:focus { border-color: var(--color-ink); outline: 2px solid var(--color-ember-ink); outline-offset: 1px; }
+
+/* ---- Reduced motion: everything settles instantly ---- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
