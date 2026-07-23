@@ -223,10 +223,16 @@ export function ApplyForm() {
 
       <button
         type="submit"
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-ember bg-ember text-paper px-6 py-4 micro font-medium hover:bg-ember-deep transition-colors cursor-pointer"
+        className="stripes-hover relative block w-full bg-ember-ink text-paper py-6 sm:py-7 text-center cursor-pointer"
       >
-        {open ? `Apply to ${cohort.name}` : "Join the waitlist"}
-        <span aria-hidden="true">→</span>
+        <span
+          aria-hidden="true"
+          className="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t-2 border-r-2 border-current"
+        />
+        <span className="relative z-10 font-medium text-base sm:text-lg tracking-[0.18em] uppercase">
+          {open ? `Apply to ${cohort.name}` : "Join the waitlist"}{" "}
+          <span aria-hidden="true">→</span>
+        </span>
       </button>
     </form>
   );

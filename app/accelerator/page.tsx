@@ -3,6 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
 import { MediaSlot } from "@/components/media-slot";
 import { CtaButton } from "@/components/cta";
+import { BigCta } from "@/components/big-cta";
 import { Section, PlusCorners } from "@/components/section";
 import { cohort, primaryCta, statusLine } from "@/content/site";
 import {
@@ -517,10 +518,10 @@ export default function AcceleratorPage() {
               </h2>
             </Reveal>
             <Reveal delay={160}>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <CtaButton href={cta.href} variant="ember">
-                  {cta.label}
-                </CtaButton>
+              <div className="mt-10">
+                <BigCta href={cta.href}>{cta.label}</BigCta>
+              </div>
+              <div className="mt-4 flex justify-center">
                 <CtaButton href="/contact" variant="ghost">
                   Talk to us first
                 </CtaButton>

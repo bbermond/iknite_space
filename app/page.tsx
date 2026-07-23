@@ -7,6 +7,8 @@ import { MediaSlot } from "@/components/media-slot";
 import { CtaButton } from "@/components/cta";
 import { Section, PlusCorners } from "@/components/section";
 import { OrganizationJsonLd } from "@/components/json-ld";
+import { BigCta } from "@/components/big-cta";
+import { PipelineDiagram } from "@/components/pipeline-diagram";
 import { cohort, primaryCta, statusLine } from "@/content/site";
 import { stats, learningModel, ticker } from "@/content/program";
 import { projects } from "@/content/projects";
@@ -69,6 +71,12 @@ export default function HomePage() {
                 </div>
               ))}
             </dl>
+          </Reveal>
+
+          <Reveal delay={450}>
+            <div className="mt-6">
+              <PipelineDiagram />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -296,8 +304,14 @@ export default function HomePage() {
             <Reveal key={a.t} delay={i * 80}>
               <Link
                 href={a.href}
-                className="group block h-full p-6 no-underline hover:bg-paper-2 transition-colors"
+                className="group relative block h-full p-6 no-underline hover:bg-paper-2 transition-colors"
               >
+                <span
+                  aria-hidden="true"
+                  className="absolute top-5 right-5 micro text-ink/30 tabular"
+                >
+                  0{i + 1}
+                </span>
                 <h3 className="text-[15px] font-medium">{a.t}</h3>
                 <p className="mt-2 text-[13px] text-ink-soft min-h-12">{a.d}</p>
                 <span className="micro text-ember inline-flex items-center gap-1">
@@ -332,10 +346,8 @@ export default function HomePage() {
               </h2>
             </Reveal>
             <Reveal delay={160}>
-              <div className="mt-8 flex justify-center">
-                <CtaButton href={cta.href} variant="ember">
-                  {cta.label}
-                </CtaButton>
+              <div className="mt-10">
+                <BigCta href={cta.href}>{cta.label}</BigCta>
               </div>
             </Reveal>
           </div>
