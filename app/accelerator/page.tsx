@@ -314,7 +314,10 @@ export default function AcceleratorPage() {
             </dl>
 
             <Reveal delay={240}>
-              <div className="mt-8">
+              <div className="mt-8 flex flex-wrap gap-3">
+                <CtaButton href="/mentors" variant="primary">
+                  Meet the mentors
+                </CtaButton>
                 <CtaButton href="/partner#mentor" variant="ghost">
                   Become a mentor
                 </CtaButton>

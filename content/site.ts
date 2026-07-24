@@ -51,6 +51,7 @@ export const site = {
 export const nav = [
   { href: "/accelerator", label: "Accelerator" },
   { href: "/projects", label: "Projects" },
+  { href: "/mentors", label: "Mentors" },
   { href: "/partner", label: "Partner" },
   { href: "/about", label: "About" },
   { href: "/insights", label: "Insights" },

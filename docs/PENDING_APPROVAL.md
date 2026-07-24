@@ -16,12 +16,16 @@ safe placeholder framing until confirmed by Bermond.
 | Internship | Described as "internship & industry transition pathways" (not guaranteed) | Confirm 6-month internship remains standard |
 | Eligibility | Engineering graduates / final-year internship students (+ self-taught encouraged) — from the current site's published criteria | Confirm wording, esp. whether self-taught applicants are formally eligible |
 
-## People (deliberately NOT published)
+## People
 
-- **Mentor roster** — the old homepage's seven mentors (Acho Arnold Ewin,
-  Ian Joyce, Margaret Adams, Mbianou Bradon, Phillip Kang, Eric Williams,
-  Kambang Sinclaire) were not republished. Each needs consent, current
-  affiliation, photo, and bio before adding.
+- **Mentor roster — now published at the owner's direction (July 2026)**
+  on `/mentors` via `content/mentors.ts`: Acho Arnold Ewin, Kambang
+  Sinclaire, Ian Joyce, Margaret Adams, Mbianou Bradon, Phillip Kang,
+  Eric Williams. The page frames them as mentors of *recent cohorts* with
+  affiliations "as listed at the time of mentoring". Still to verify per
+  person: spelling, current affiliation, photo consent, and continued
+  participation — edit or remove entries in `content/mentors.ts` only.
+  Photos still needed at `public/media/mentors/<slug>.jpg`.
 - **Team page** — no names published. Public LinkedIn candidates found during
   research (to verify + consent before publishing): Tim Merciful Ankongmbom
   (Operations Officer), Amin Jefferson (Design Educator), Tambua Evaristus

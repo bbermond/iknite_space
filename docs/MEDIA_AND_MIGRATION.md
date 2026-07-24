@@ -19,6 +19,13 @@ then each slot shows a styled placeholder naming the shot it wants.
 | `team/mentor-session.jpg` | Mentor presenting or reviewing work |
 | `team/trainees-working.jpg` | Trainees working in teams (whiteboards, code review) |
 | `program/mentorship.jpg` | A bi-weekly 1:1 mentor session in progress |
+| `mentors/acho-arnold-ewin.jpg` | Mentor headshot (old-site photo or newer, with consent) |
+| `mentors/kambang-sinclaire.jpg` | Mentor headshot |
+| `mentors/ian-joyce.jpg` | Mentor headshot |
+| `mentors/margaret-adams.jpg` | Mentor headshot |
+| `mentors/mbianou-bradon.jpg` | Mentor headshot |
+| `mentors/phillip-kang.jpg` | Mentor headshot |
+| `mentors/eric-williams.jpg` | Mentor headshot |
 
 Guidance from the brief: authentic photos only — trainees working, mentors
 reviewing, whiteboards, demos, meetups, the Buea workspace. Audit consent,
