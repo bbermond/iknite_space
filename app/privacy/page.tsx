@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy",
   description:
     "FindWellness privacy policy, in plain English: what we collect, what we deliberately don't, and how to reach us about your data.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

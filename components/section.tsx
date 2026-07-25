@@ -24,7 +24,11 @@ export function PlusCorners() {
   );
 }
 
-/** Numbered uppercase section label: `[01] — FEATURED CLINICS`. */
+/**
+ * Numbered uppercase section label: `[01] — FEATURED CLINICS`. The label text
+ * renders as an h2 so listing pages keep a sound heading outline; Tailwind's
+ * preflight leaves headings visually identical to the old span.
+ */
 export function SectionLabel({
   index,
   dark = false,
@@ -37,9 +41,11 @@ export function SectionLabel({
   return (
     <div className={`micro flex items-center gap-3 ${dark ? "text-paper/60" : "text-ink-soft"}`}>
       {index && (
-        <span className={`tabular ${dark ? "text-fern-bright" : "text-fern"}`}>[{index}]</span>
+        <span aria-hidden="true" className={`tabular ${dark ? "text-fern-bright" : "text-fern"}`}>
+          [{index}]
+        </span>
       )}
-      <span>{children}</span>
+      <h2 className="font-normal">{children}</h2>
       <span
         aria-hidden="true"
         className={`flex-1 border-t ${dark ? "border-paper/20" : "hairline"}`}

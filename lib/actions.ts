@@ -70,10 +70,14 @@ export async function submitForm(formData: FormData) {
     redirect("/thank-you");
   }
 
+  // Cap the field count so a hand-crafted POST can't bloat storage or the
+  // downstream webhook; real site forms use well under this.
+  const MAX_FIELDS = 30;
   const record: Record<string, string> = {};
   for (const [key, value] of formData.entries()) {
     if (key.startsWith("_") || key === "website_url") continue;
-    record[key] = sanitize(value);
+    if (Object.keys(record).length >= MAX_FIELDS) break;
+    record[key.slice(0, 100)] = sanitize(value);
   }
 
   // Server-side floor mirrors the client's required fields: never store an

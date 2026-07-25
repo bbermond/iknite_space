@@ -14,7 +14,8 @@ import { DirectoryFilters } from "@/components/directory-filters";
 export const metadata: Metadata = {
   title: "Directory — every vetted practice in the South Bay",
   description:
-    "Search and filter 366 researched wellness practices — med spas, longevity clinics, IV lounges, hormone specialists, and weight-loss programs across the South Bay.",
+    "Search and filter 270+ researched wellness practices — med spas, longevity clinics, IV lounges, hormone specialists, and weight-loss programs across the South Bay.",
+  alternates: { canonical: "/directory" },
 };
 
 const PER_PAGE = 24;
@@ -131,6 +132,7 @@ export default async function DirectoryPage({
           </div>
         ) : (
           <>
+            <h2 className="sr-only">Results</h2>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 list-none">
               {pageResults.map((b) => (
                 <li key={b.slug}>

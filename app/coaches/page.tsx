@@ -9,7 +9,8 @@ import { BigCta } from "@/components/big-cta";
 export const metadata: Metadata = {
   title: "Coaches & Health Consultants",
   description:
-    "The FindWellness coach collective — vetted health consultants, concierge practitioners, fitness and performance coaches, and nutritionists serving San Jose, Los Gatos, and the South Bay. Selective, verified, and built for people who want a human in their corner.",
+    "Vetted health consultants, concierge practitioners, fitness coaches, and nutritionists serving the South Bay — selective, verified, never pay-to-rank.",
+  alternates: { canonical: "/coaches" },
 };
 
 export default async function CoachesPage() {

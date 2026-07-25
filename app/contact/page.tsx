@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Talk to the FindWellness research desk — listing corrections, partnerships, and press. We reply to every message.",
+  alternates: { canonical: "/contact" },
 };
 
 const TOPICS = [

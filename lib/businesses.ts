@@ -108,12 +108,28 @@ export function fromAirtableFields(id: string, f: Record<string, unknown>): Busi
   };
 }
 
+/**
+ * Colliding slugs get -2/-3 suffixes assigned in airtableId order — a stable,
+ * immutable key — so a record keeps the same URL whether it renders from the
+ * bundled snapshot or a live Airtable read, regardless of list ordering.
+ */
 function dedupeSlugs(list: Business[]): Business[] {
-  const seen = new Map<string, number>();
+  const groups = new Map<string, Business[]>();
+  for (const b of list) {
+    const g = groups.get(b.slug);
+    if (g) g.push(b);
+    else groups.set(b.slug, [b]);
+  }
+  const finalSlug = new Map<Business, string>();
+  for (const [slug, group] of groups) {
+    const ordered = [...group].sort((a, b) => a.airtableId.localeCompare(b.airtableId));
+    ordered.forEach((b, i) => {
+      finalSlug.set(b, i === 0 ? slug : `${slug}-${i + 1}`);
+    });
+  }
   return list.map((b) => {
-    const n = seen.get(b.slug) ?? 0;
-    seen.set(b.slug, n + 1);
-    return n === 0 ? b : { ...b, slug: `${b.slug}-${n + 1}` };
+    const s = finalSlug.get(b)!;
+    return s === b.slug ? b : { ...b, slug: s };
   });
 }
 
@@ -159,9 +175,82 @@ export async function getAllBusinesses(): Promise<Business[]> {
   return loadSnapshot();
 }
 
-/** Published businesses only — everything public renders from this. */
+/**
+ * The research base contains repeat-scrape duplicates (same practice, several
+ * records). Public pages collapse each exact-name group to its most complete
+ * record, filling gaps (rating, images, quotes…) from the duplicates. The
+ * admin CMS still sees every raw record for cleanup.
+ */
+function completeness(b: Business): number {
+  return (
+    (b.googleRating != null ? 8 : 0) +
+    (b.yelpRating != null ? 2 : 0) +
+    (b.images.length > 0 ? 4 : 0) +
+    (b.quotes.length > 0 ? 2 : 0) +
+    ((b.copy?.length ?? 0) > 300 ? 1 : 0) +
+    (b.website ? 1 : 0) +
+    (b.phone ? 1 : 0)
+  );
+}
+
+function nameKey(b: Business): string {
+  return b.name.toLowerCase().replace(/['’]/g, "").replace(/\s+/g, " ").trim();
+}
+
+function mergeDuplicates(list: Business[]): Business[] {
+  const groups = new Map<string, Business[]>();
+  for (const b of list) {
+    const key = nameKey(b);
+    const g = groups.get(key);
+    if (g) g.push(b);
+    else groups.set(key, [b]);
+  }
+
+  const out: Business[] = [];
+  for (const group of groups.values()) {
+    if (group.length === 1) {
+      out.push(group[0]);
+      continue;
+    }
+    const ordered = [...group].sort(
+      (a, b) => completeness(b) - completeness(a) || a.airtableId.localeCompare(b.airtableId)
+    );
+    const winner = { ...ordered[0] };
+    // The merged record owns the group's canonical URL: the shortest slug in
+    // the group is the un-suffixed base (suffixes only exist because of the
+    // duplicates being collapsed here).
+    winner.slug = group.reduce((s, b) => (b.slug.length < s.length ? b.slug : s), winner.slug);
+    for (const loser of ordered.slice(1)) {
+      for (const key of [
+        "zone", "category", "city", "address", "phone", "website", "mapsUrl",
+        "yelpUrl", "copy", "services", "tier", "pricing",
+      ] as const) {
+        if (winner[key] == null && loser[key] != null) {
+          (winner as Record<string, unknown>)[key] = loser[key];
+        }
+      }
+      if (winner.googleRating == null && loser.googleRating != null) {
+        winner.googleRating = loser.googleRating;
+        winner.googleReviews = loser.googleReviews;
+      }
+      if (winner.yelpRating == null && loser.yelpRating != null) {
+        winner.yelpRating = loser.yelpRating;
+        winner.yelpReviews = loser.yelpReviews;
+      }
+      if (winner.images.length === 0 && loser.images.length > 0) winner.images = loser.images;
+      if (winner.quotes.length === 0 && loser.quotes.length > 0) winner.quotes = loser.quotes;
+      if (loser.featured) winner.featured = true;
+    }
+    out.push(winner);
+  }
+  return out.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** Published, de-duplicated businesses — everything public renders from this. */
 export async function getPublishedBusinesses(): Promise<Business[]> {
-  return (await getAllBusinesses()).filter((b) => b.published !== false);
+  return mergeDuplicates(
+    (await getAllBusinesses()).filter((b) => b.published !== false)
+  );
 }
 
 export async function getBusinessBySlug(slug: string): Promise<Business | undefined> {

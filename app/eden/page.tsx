@@ -8,7 +8,8 @@ import { BigCta } from "@/components/big-cta";
 export const metadata: Metadata = {
   title: "Eden — The Knowledge Garden",
   description:
-    "Plain-English briefs on the research and technology reshaping wellness — GLP-1s, NAD+, VO2max, sauna and cold, glucose monitors, epigenetic clocks, creatine, and sleep wearables — translated, and graded by what the evidence actually supports.",
+    "Plain-English briefs on the science reshaping wellness — GLP-1s, NAD+, VO2max, heat and cold, CGMs, and more — graded by what the evidence supports.",
+  alternates: { canonical: "/eden" },
 };
 
 const TAG_INDEX: Record<(typeof edenTags)[number], string> = {

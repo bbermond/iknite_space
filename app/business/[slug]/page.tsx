@@ -34,8 +34,11 @@ export async function generateMetadata({
   const b = businesses.find((x) => x.slug === slug);
   if (!b) return { title: "Not found" };
   const cat = categoryByAirtableName(b.category);
+  // Many source names already end in "— {City}"; avoid "…— Los Gatos in Los Gatos".
+  const nameEndsWithCity = Boolean(b.city && b.name.toLowerCase().endsWith(b.city.toLowerCase()));
+  const suffix = nameEndsWithCity || !b.city ? "" : ` in ${b.city}`;
   return {
-    title: `${b.name} — ${cat?.shortName ?? "Wellness"}${b.city ? ` in ${b.city}` : ""}`,
+    title: `${b.name} — ${cat?.name ?? "Wellness"}${suffix}`,
     description: blurb(b, 160),
     alternates: { canonical: `/business/${b.slug}` },
   };
@@ -86,9 +89,22 @@ export default async function BusinessPage({
       : {}),
   };
 
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Directory", item: `${site.url}/directory` },
+      ...(cat
+        ? [{ "@type": "ListItem", position: 2, name: cat.name, item: `${site.url}/categories/${cat.slug}` }]
+        : []),
+      { "@type": "ListItem", position: cat ? 3 : 2, name: b.name, item: `${site.url}/business/${b.slug}` },
+    ],
+  };
+
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbs} />
 
       {/* ---- Header ---- */}
       <div className="wash-fern border-b hairline">

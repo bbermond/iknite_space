@@ -94,7 +94,7 @@ export async function listAllRecords(): Promise<AirtableRecord[]> {
 }
 
 export async function getRecord(id: string): Promise<AirtableRecord> {
-  return request(`${encodeURIComponent(TABLE)}/${id}`);
+  return request(`${encodeURIComponent(TABLE)}/${encodeURIComponent(id)}`);
 }
 
 export async function createRecord(fields: Record<string, unknown>): Promise<AirtableRecord> {

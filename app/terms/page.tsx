@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Terms",
   description:
     "FindWellness terms of use, in plain English: an educational directory, not medical advice — plus accuracy, acceptable use, and liability.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

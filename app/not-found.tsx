@@ -31,7 +31,7 @@ export default function NotFound() {
           <input
             type="search"
             name="q"
-            placeholder="Search 366 vetted practices"
+            placeholder="Search the directory"
             aria-label="Search the directory"
             className="field !border-ink/45 flex-1"
           />

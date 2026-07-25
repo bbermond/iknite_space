@@ -13,6 +13,10 @@ import { OrganizationJsonLd } from "@/components/json-ld";
 
 export const revalidate = 300;
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 const TICKER = [
   "Longevity medicine",
   "GLP-1 programs",
@@ -31,9 +35,12 @@ const TICKER = [
 export default async function HomePage() {
   const businesses = await getPublishedBusinesses();
 
-  const featuredPool = businesses
-    .filter((b) => b.featured || (b.googleRating ?? b.yelpRating ?? 0) >= 4.5)
-    .map(toIndexEntry);
+  // Cap the client payload: featured picks always ship; the rest is the
+  // highest-scoring tail, which is plenty for every category/city filter.
+  const ratedPool = sortByQuality(
+    businesses.filter((b) => b.featured || (b.googleRating ?? b.yelpRating ?? 0) >= 4.5)
+  );
+  const featuredPool = ratedPool.slice(0, 90).map(toIndexEntry);
 
   const totalReviews = businesses.reduce(
     (sum, b) => sum + (b.googleReviews ?? 0) + (b.yelpReviews ?? 0),
@@ -80,7 +87,7 @@ export default async function HomePage() {
               <input
                 type="search"
                 name="q"
-                placeholder="Search 366 vetted practices — try “NAD+” or “Los Gatos”"
+                placeholder={`Search ${businesses.length} vetted practices — try “NAD+” or “Los Gatos”`}
                 aria-label="Search the directory"
                 className="field !border-ink/45 flex-1"
               />

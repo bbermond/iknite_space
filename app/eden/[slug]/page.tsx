@@ -25,6 +25,7 @@ export async function generateMetadata({
   return {
     title: `${brief.title} — Eden`,
     description: brief.dek,
+    alternates: { canonical: `/eden/${brief.slug}` },
   };
 }
 
@@ -56,8 +57,12 @@ export default async function BriefPage({
           "@type": "Article",
           headline: brief.title,
           description: brief.dek,
-          dateModified: "2026-07",
+          datePublished: "2026-07-01",
+          dateModified: "2026-07-25",
+          url: `${site.url}/eden/${brief.slug}`,
+          mainEntityOfPage: { "@type": "WebPage", "@id": `${site.url}/eden/${brief.slug}` },
           author: { "@type": "Organization", name: site.name },
+          publisher: { "@type": "Organization", name: site.name },
         }}
       />
 

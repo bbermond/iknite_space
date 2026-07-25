@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Wellness categories in the South Bay",
   description:
     "Seven categories of vetted wellness care — med spas, functional and longevity medicine, medical weight loss, hormone clinics, IV lounges, and more.",
+  alternates: { canonical: "/categories" },
 };
 
 export default async function CategoriesPage() {

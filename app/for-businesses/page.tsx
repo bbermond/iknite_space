@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "For businesses",
   description:
     "List your practice on FindWellness — the South Bay's curated wellness directory. Standard listings are free, and featured placement is earned, never sold.",
+  alternates: { canonical: "/for-businesses" },
 };
 
 const INCLUDES = [
@@ -82,7 +83,7 @@ export default function ForBusinessesPage() {
           <Reveal delay={80}>
             <dl className="grid grid-cols-2 gap-px bg-ink/10 border hairline">
               {[
-                { n: "366", label: "Vetted practices listed" },
+                { n: "270+", label: "Vetted practices listed" },
                 { n: "7", label: "Care categories" },
                 { n: "17", label: "South Bay cities covered" },
                 { n: "22k+", label: "Reviews analyzed" },

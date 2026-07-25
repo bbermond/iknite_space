@@ -9,7 +9,10 @@ import { FIELDS } from "@/lib/airtable";
 export function toAirtableFields(body: Record<string, unknown>): Record<string, unknown> {
   const out: Record<string, unknown> = {};
 
-  const text = (v: unknown) => (typeof v === "string" ? v.trim() : undefined);
+  // null and "" both mean "clear this field" — the dashboard's selects send
+  // null for the em-dash empty option.
+  const text = (v: unknown) =>
+    v === null ? "" : typeof v === "string" ? v.trim() : undefined;
   const numeric = (v: unknown) => {
     if (v === "" || v === null) return null;
     const n = Number(v);

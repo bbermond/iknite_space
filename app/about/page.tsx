@@ -7,7 +7,8 @@ import { BigCta } from "@/components/big-cta";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Why FindWellness exists: a curated, data-backed directory of 366 vetted wellness practices across the South Bay — researched by hand, never pay-to-rank.",
+    "Why FindWellness exists: a curated, data-backed directory of 270+ vetted wellness practices across the South Bay — researched by hand, never pay-to-rank.",
+  alternates: { canonical: "/about" },
 };
 
 const TRACKED = [
@@ -94,7 +95,7 @@ export default function AboutPage() {
               </p>
               <p>
                 FindWellness is our answer: a curated, data-backed directory of
-                366 vetted practices across 7 categories and 17 South Bay
+                270+ vetted practices across 7 categories and 17 South Bay
                 cities — built by a research desk, not an ad server.
               </p>
             </div>
@@ -142,7 +143,7 @@ export default function AboutPage() {
               </ul>
               <dl className="mt-8 pt-6 border-t hairline grid grid-cols-2 gap-x-6 gap-y-5">
                 {[
-                  { n: "366", label: "Vetted practices" },
+                  { n: "270+", label: "Vetted practices" },
                   { n: "7", label: "Care categories" },
                   { n: "17", label: "South Bay cities" },
                   { n: "22k+", label: "Reviews analyzed" },

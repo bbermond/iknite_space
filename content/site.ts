@@ -11,7 +11,7 @@ export const site = {
   region: "South Bay",
   tagline: "The South Bay's curated guide to modern wellness",
   description:
-    "366 vetted med spas, longevity clinics, IV lounges, hormone specialists, and weight-loss programs across San Jose, Los Gatos, and the South Bay — researched, rated, and organized so you can choose with confidence.",
+    "270+ vetted med spas, longevity clinics, IV lounges, and hormone specialists across San Jose, Los Gatos, and the South Bay — researched, rated, organized.",
   /** Set NEXT_PUBLIC_SITE_URL on Railway once the custom domain is live. */
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://web-production-fdcc5.up.railway.app",
   /** Contact happens through the /contact form; set an address to also show it. */

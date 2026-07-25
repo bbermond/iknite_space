@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "How it works",
   description:
     "How FindWellness turns 22,000+ Google and Yelp reviews into a clear, rankable directory — research, compare, book directly. No pay-to-rank, ever.",
+  alternates: { canonical: "/how-it-works" },
 };
 
 const STEPS = [

@@ -7,6 +7,8 @@ import { edenBriefs } from "@/content/eden";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const businesses = await getPublishedBusinesses();
   const cityNames = new Set(businesses.map((b) => b.city).filter(Boolean));
+  // Data-driven pages revalidate on a 5-minute cadence; stamp generation time.
+  const lastModified = new Date();
 
   const statics: MetadataRoute.Sitemap = [
     { url: `${site.url}/`, changeFrequency: "daily", priority: 1 },
@@ -48,5 +50,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.6,
     })),
-  ];
+  ].map((entry) => ({ ...entry, lastModified }));
 }

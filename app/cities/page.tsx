@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Wellness by city — 17 South Bay cities",
   description:
     "Browse vetted wellness practices city by city — San Jose, Los Gatos, Sunnyvale, Santa Clara, and every corner of the South Bay.",
+  alternates: { canonical: "/cities" },
 };
 
 export default async function CitiesPage() {
