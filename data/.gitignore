@@ -1,3 +1,4 @@
 # Form submissions land here in local/dev runs — never commit them.
 *
 !.gitignore
+!businesses.json

@@ -24,19 +24,26 @@ export function PlusCorners() {
   );
 }
 
-/** Numbered uppercase section label: `[01] — ACCELERATOR`. */
+/** Numbered uppercase section label: `[01] — FEATURED CLINICS`. */
 export function SectionLabel({
   index,
+  dark = false,
   children,
 }: {
   index?: string;
+  dark?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <div className="micro text-ink-soft flex items-center gap-3">
-      {index && <span className="text-ember tabular">[{index}]</span>}
+    <div className={`micro flex items-center gap-3 ${dark ? "text-paper/60" : "text-ink-soft"}`}>
+      {index && (
+        <span className={`tabular ${dark ? "text-fern-bright" : "text-fern"}`}>[{index}]</span>
+      )}
       <span>{children}</span>
-      <span aria-hidden="true" className="flex-1 border-t hairline" />
+      <span
+        aria-hidden="true"
+        className={`flex-1 border-t ${dark ? "border-paper/20" : "hairline"}`}
+      />
     </div>
   );
 }

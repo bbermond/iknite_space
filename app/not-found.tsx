@@ -1,72 +1,60 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "404",
-  description: "This page doesn't exist.",
+  title: "Page not found",
   robots: { index: false, follow: false },
 };
 
-const destinations = [
-  { href: "/", label: "Home", note: "Start from the top" },
-  { href: "/accelerator", label: "Accelerator", note: "The six-month program" },
-  { href: "/projects", label: "Projects", note: "Proof of work" },
-  { href: "/partner", label: "Partner", note: "Mentor, hire, sponsor" },
-  { href: "/apply", label: "Apply", note: "Your move" },
-] as const;
+const QUICK_LINKS = [
+  { href: "/directory", label: "The full directory" },
+  { href: "/categories", label: "All categories" },
+  { href: "/cities", label: "All cities" },
+  { href: "/eden", label: "Eden — knowledge garden" },
+];
 
 export default function NotFound() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 dot-grid dot-grid-fade" aria-hidden="true" />
-      <div className="absolute inset-0 wash-ember" aria-hidden="true" />
-
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-10 pt-20 pb-16 sm:pt-28 sm:pb-24">
-        <Reveal>
-          <p className="micro inline-flex items-center gap-2 border hairline-strong bg-paper px-3 py-2">
-            <span className="inline-block w-2 h-2 bg-ember animate-blink" aria-hidden="true" />
-            Error — route not found
-          </p>
-        </Reveal>
-
-        <h1 className="mt-6 text-[6rem] sm:text-[10rem] lg:text-[12rem] font-medium leading-none tracking-tight tabular">
-          4<span className="text-ember">0</span>4
+    <div className="relative wash-fern overflow-hidden min-h-[70vh]">
+      <div aria-hidden="true" className="absolute inset-0 dot-grid dot-grid-fade opacity-60" />
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-10 pt-20 sm:pt-28 pb-24">
+        <p className="micro text-fern mb-4">404 — Page not found</p>
+        <h1 className="display text-4xl sm:text-6xl lg:text-7xl leading-[1.02] max-w-[14ch]">
+          Lost in the garden.
         </h1>
+        <p className="mt-6 max-w-[52ch] text-ink-soft text-[15px] sm:text-base">
+          The page you were looking for has moved, closed, or never existed.
+          The directory, on the other hand, is very much open.
+        </p>
 
-        <Reveal delay={120}>
-          <p className="mt-6 max-w-[46ch] text-[15px] text-ink-soft">
-            This page doesn&apos;t exist — these do:
-          </p>
-        </Reveal>
+        <form action="/directory" className="mt-8 flex max-w-xl" role="search">
+          <input
+            type="search"
+            name="q"
+            placeholder="Search 366 vetted practices"
+            aria-label="Search the directory"
+            className="field !border-ink/45 flex-1"
+          />
+          <button
+            type="submit"
+            className="micro bg-fern text-paper px-5 border border-fern invert-hover shrink-0"
+          >
+            Search
+          </button>
+        </form>
 
-        <Reveal delay={200}>
-          <ul className="mt-8 max-w-2xl border hairline divide-y [&>li]:hairline bg-paper/80">
-            {destinations.map((d, i) => (
-              <li key={d.href}>
-                <Link
-                  href={d.href}
-                  className="group flex items-baseline gap-4 px-5 py-4 no-underline hover:bg-paper-2 transition-colors"
-                >
-                  <span className="micro text-ember tabular">
-                    [0{i + 1}]
-                  </span>
-                  <span className="text-[15px] font-medium group-hover:text-ember transition-colors">
-                    {d.label}
-                  </span>
-                  <span className="micro text-ink-soft hidden sm:inline">{d.note}</span>
-                  <span
-                    className="ml-auto transition-transform group-hover:translate-x-1"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        <div className="mt-10 flex flex-wrap gap-3">
+          {QUICK_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="micro no-underline border hairline-strong px-4 py-2.5 invert-hover"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

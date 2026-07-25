@@ -1,95 +1,123 @@
 import type { Metadata } from "next";
-import { Decode } from "@/components/decode";
+import Link from "next/link";
+import { Section } from "@/components/section";
 import { Reveal } from "@/components/reveal";
-import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "What Iknite Space collects through this site, why, where it lives, and how to access, correct, or delete your data.",
+    "FindWellness privacy policy, in plain English: what we collect, what we deliberately don't, and how to reach us about your data.",
 };
-
-const sections = [
-  {
-    heading: "What we collect",
-    paragraphs: [
-      "This site collects only what you type into its forms: accelerator applications, partner interest (mentoring, hiring, sponsoring, events, founders), and contact messages. Each submission carries the fields you filled in — typically your name, email, and the content of your message or application.",
-      "We don't run third-party form embeds, ad trackers, or analytics scripts that profile you.",
-    ],
-  },
-  {
-    heading: "Why we collect it",
-    paragraphs: [
-      "Two reasons: running the selection process for the accelerator, and responding to the people who write to us. That's the whole list. We don't use your submission for anything you wouldn't expect from having sent it.",
-    ],
-  },
-  {
-    heading: "Where it lives",
-    paragraphs: [
-      "Submissions are stored on infrastructure under Iknite's control. No third-party form processor sits between you and us — your data lands directly with the team.",
-    ],
-  },
-  {
-    heading: "What we never do",
-    paragraphs: [
-      "We do not sell your data. We do not share it with third parties for marketing. We do not add you to mailing lists you didn't ask for.",
-    ],
-  },
-  {
-    heading: "Your rights",
-    paragraphs: [
-      `You can ask us at any time what we hold about you, ask us to correct it, or ask us to delete it. Write to ${site.email} and we'll handle it directly.`,
-    ],
-  },
-  {
-    heading: "Who operates this site",
-    paragraphs: [
-      "This site is operated by Iknite. The formal legal entity line of this policy is pending confirmation and will be updated here once confirmed.",
-    ],
-  },
-] as const;
 
 export default function PrivacyPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b hairline">
-        <div className="absolute inset-0 dot-grid dot-grid-fade" aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-5 sm:px-10 pt-16 pb-12 sm:pt-24 sm:pb-16">
+      {/* ---- Header ---- */}
+      <div className="relative wash-fern overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 dot-grid dot-grid-fade opacity-60" />
+        <div className="relative mx-auto max-w-6xl px-5 sm:px-10 pt-16 pb-12">
           <Reveal>
-            <p className="micro text-ink-soft">Legal — plain terms, no fine print</p>
+            <p className="micro text-fern mb-4">Privacy · Effective July 2026</p>
           </Reveal>
-          <h1 className="mt-6 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight">
-            <Decode text="Privacy." />
-          </h1>
-        </div>
-      </section>
-
-      <div className="mx-auto max-w-6xl px-5 sm:px-10 py-14 sm:py-20">
-        <div className="max-w-[62ch] space-y-12">
-          {sections.map((s, i) => (
-            <Reveal as="section" key={s.heading} delay={i * 60}>
-              <h2 className="micro text-ink-soft flex items-center gap-3">
-                <span className="text-ember tabular">[0{i + 1}]</span>
-                {s.heading}
-              </h2>
-              <div className="mt-4 space-y-3 text-[14px] text-ink-soft border-l border-ink/10 pl-4">
-                {s.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-            </Reveal>
-          ))}
-
-          <Reveal delay={sections.length * 60}>
-            <p className="micro text-ink-soft border-t hairline pt-6">
-              Questions about this policy —{" "}
-              <a href={`mailto:${site.email}`} className="text-ink no-underline hover:text-ember transition-colors">
-                {site.email}
-              </a>
+          <Reveal delay={60}>
+            <h1 className="display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] max-w-[18ch]">
+              A short policy, in plain English.
+            </h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="mt-5 max-w-[54ch] text-ink-soft text-[15px] sm:text-base">
+              FindWellness collects very little, tracks nothing across the
+              web, and sells no data. Here is the whole picture.
             </p>
           </Reveal>
         </div>
       </div>
+
+      <Section label="Privacy policy" index="01">
+        <Reveal>
+          <div className="prose-fw text-[15px] text-ink-soft">
+            <h2 className="text-ink">What we collect</h2>
+            <p>Three things, and only three:</p>
+            <ul>
+              <li>
+                <strong className="text-ink">Form submissions.</strong> When
+                you contact us, request a listing, or apply to the coach
+                collective, we receive what you typed — typically your name,
+                email address, and the details of your message or practice.
+                You choose what to send; nothing is collected from a form you
+                don&rsquo;t submit.
+              </li>
+              <li>
+                <strong className="text-ink">A city preference.</strong> If
+                you pick a city while browsing, we store that choice in your
+                browser&rsquo;s localStorage so the site remembers it next
+                time. It never leaves your device, we never see it, and
+                clearing your browser data removes it.
+              </li>
+              <li>
+                <strong className="text-ink">Standard server logs.</strong>{" "}
+                Like nearly every website, our servers record basic technical
+                details of each request — such as IP address, browser type,
+                and timestamps — used only to operate and secure the site.
+              </li>
+            </ul>
+
+            <h2 className="text-ink">What we don&rsquo;t collect</h2>
+            <p>
+              No advertising trackers. No analytics cookies. No cross-site
+              profiles, no fingerprinting, no pixels watching you read. We do
+              not sell, rent, or trade personal data — to anyone, for any
+              reason.
+            </p>
+
+            <h2 className="text-ink">How submissions are used</h2>
+            <p>
+              We use what you send us to respond to you and to maintain the
+              directory — verifying a correction, evaluating a listing
+              request, or reviewing a coach application. Submissions are not
+              added to marketing lists, and your email is used only for the
+              conversation you started.
+            </p>
+
+            <h2 className="text-ink">Third-party content</h2>
+            <p>
+              Ratings and review counts shown in the directory are attributed
+              to Google and Yelp and drawn from their public data; those marks
+              belong to their owners. Listings also link out to practice
+              websites and profiles. Once you leave FindWellness, the privacy
+              practices of those sites are their own — this policy covers only
+              us.
+            </p>
+
+            <h2 className="text-ink">Retention and removal</h2>
+            <p>
+              We keep form submissions for as long as they are useful for the
+              purpose you sent them — an open conversation, an active listing
+              request. If you would like a submission deleted, ask through the{" "}
+              <Link href="/contact" className="text-fern">
+                contact page
+              </Link>{" "}
+              and we will remove it.
+            </p>
+
+            <h2 className="text-ink">Changes to this policy</h2>
+            <p>
+              If this policy changes, we will update this page and its
+              effective date. Since we collect so little, we expect changes to
+              be rare and boring.
+            </p>
+
+            <h2 className="text-ink">Questions</h2>
+            <p>
+              Anything unclear? Ask us via the{" "}
+              <Link href="/contact" className="text-fern">
+                contact page
+              </Link>
+              . A person reads every message.
+            </p>
+          </div>
+        </Reveal>
+      </Section>
     </>
   );
 }

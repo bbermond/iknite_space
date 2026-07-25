@@ -9,12 +9,11 @@ import { Wordmark } from "@/components/wordmark";
 export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const cta = primaryCta();
 
   return (
     <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur border-b hairline">
       <div className="mx-auto max-w-6xl px-5 sm:px-10 flex items-center justify-between h-14">
-        <Link href="/" className="no-underline" aria-label="Iknite Space — home">
+        <Link href="/" className="no-underline" aria-label="FindWellness — home">
           <Wordmark />
         </Link>
 
@@ -28,7 +27,7 @@ export function Nav() {
                 aria-current={active ? "page" : undefined}
                 className={`micro no-underline transition-colors ${
                   active
-                    ? "text-ember underline underline-offset-8 decoration-2"
+                    ? "text-fern underline underline-offset-8 decoration-2"
                     : "text-ink-soft hover:text-ink"
                 }`}
               >
@@ -37,10 +36,10 @@ export function Nav() {
             );
           })}
           <Link
-            href={cta.href}
-            className="micro no-underline border border-ink bg-ink text-paper px-4 py-2 ember-hover"
+            href={primaryCta.href}
+            className="micro no-underline border border-fern bg-fern text-paper px-4 py-2 invert-hover"
           >
-            {cta.label}
+            {primaryCta.label}
           </Link>
         </nav>
 
@@ -71,7 +70,7 @@ export function Nav() {
                   onClick={() => setOpen(false)}
                   aria-current={active ? "page" : undefined}
                   className={`block px-5 py-4 micro no-underline ${
-                    active ? "text-ember" : "text-ink"
+                    active ? "text-fern" : "text-ink"
                   }`}
                 >
                   {item.label}
@@ -81,11 +80,11 @@ export function Nav() {
           })}
           <li>
             <Link
-              href={cta.href}
+              href={primaryCta.href}
               onClick={() => setOpen(false)}
-              className="block px-5 py-4 micro no-underline bg-ink text-paper"
+              className="block px-5 py-4 micro no-underline bg-fern text-paper"
             >
-              {cta.label} →
+              {primaryCta.label} →
             </Link>
           </li>
         </ul>

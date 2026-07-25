@@ -1,43 +1,40 @@
-# Deploying to Railway
+# Deploying FindWellness to Railway
 
-The repo is Railway-ready: `railway.json` selects the Dockerfile build, and
-the Dockerfile produces a small standalone Next.js image listening on `$PORT`.
+The repo ships a three-stage `Dockerfile` (standalone Next.js output) and
+`railway.json`, so Railway needs no build configuration.
 
-## Option A — connect the GitHub repo (recommended, ~2 minutes)
+## First deploy
 
-1. In [Railway](https://railway.com/new), choose **Deploy from GitHub repo**
-   → select `bbermond/iknite_space`.
-2. Pick the branch to deploy (`main` after the PR merges, or
-   `claude/iknite-space-site-i39v8y` to preview before merging).
-3. Railway detects `railway.json` + `Dockerfile` automatically. Deploy.
-4. Settings → Networking → **Generate Domain** to get a public
-   `*.up.railway.app` URL.
-5. When happy, add the custom domain `iknite.space` (and `www`) and update
-   DNS at the registrar (Railway shows the exact CNAME target).
+1. Railway → New Project → Deploy from GitHub → `bbermond/iknite_space`.
+2. Railway detects `railway.json` + `Dockerfile` automatically.
+3. Settings → Networking → Generate Domain (or attach the custom domain).
 
-Every push to the selected branch auto-deploys from then on.
+## Environment variables (Service → Variables)
 
-## Option B — CLI
+| Variable | Purpose |
+| --- | --- |
+| `ADMIN_PASSWORD` | Enables `/admin` (the CMS login). Without it, admin shows setup instructions. |
+| `AIRTABLE_API_KEY` | Airtable personal access token (`data.records:read` + `data.records:write` on the FindWellness base). Enables live data + CMS writes. Create at airtable.com/create/tokens. |
+| `AIRTABLE_BASE_ID` | Optional — defaults to the FindWellness South Bay base. |
+| `NEXT_PUBLIC_SITE_URL` | Set to the public URL (e.g. `https://findwellness.com`) once the domain is live; drives canonicals, sitemap, and JSON-LD. |
+| `DATA_DIR` | Optional — attach a Railway Volume at `/data` and set `DATA_DIR=/data` so form submissions survive redeploys. |
+| `SUBMISSIONS_WEBHOOK_URL` | Optional — POSTs every form submission as JSON (Slack, Zapier, Make, CRM). |
 
-```bash
-npm i -g @railway/cli
-railway login
-railway init      # create/link the project
-railway up        # build & deploy
-railway domain    # generate the public URL
-```
+Without any variables the site still works fully read-only from the bundled
+snapshot of the Airtable base (`data/businesses.json`).
 
-## Environment variables (all optional)
+## Post-deploy smoke check
 
-| Var | Purpose |
-|---|---|
-| `DATA_DIR` | Where form submissions append as `submissions.jsonl`. Attach a Railway **Volume** (e.g. mounted at `/data`) and set `DATA_DIR=/data` so applications survive redeploys. Without a volume, submissions persist only until the next deploy — set the webhook below. |
-| `SUBMISSIONS_WEBHOOK_URL` | Every submission is POSTed as JSON — point it at a Zapier/Make/n8n hook, Google Apps Script, Slack webhook, or your CRM endpoint. Recommended for production. |
+- `/` renders with the featured clinics section populated.
+- `/directory?q=nad` returns filtered results.
+- `/business/newu-hydration-lounge` renders with rating + JSON-LD.
+- `/admin` → login → dashboard shows 366 listings; toggling Featured on a
+  listing updates Airtable (requires both env vars).
+- `/sitemap.xml` and `/robots.txt` respond.
 
-## Post-deploy checks
+## How content flows
 
-- `/` renders with the loader animation, then the hero.
-- Submit a test application on `/apply` → lands on `/thank-you`; check the
-  volume file or webhook received it.
-- `/categories/blog/` redirects to `/insights` (legacy SEO paths).
-- `robots.txt` and `sitemap.xml` resolve.
+Airtable is the source of truth. With `AIRTABLE_API_KEY` set, public pages
+re-read Airtable at most every 5 minutes (plus immediate revalidation after
+any CMS write). The bundled snapshot is only a fallback so the site can
+never render empty.

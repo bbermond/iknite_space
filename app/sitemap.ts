@@ -1,42 +1,52 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
-import { projects } from "@/content/projects";
-import { insights } from "@/content/insights";
+import { categories, cities } from "@/lib/taxonomy";
+import { getPublishedBusinesses } from "@/lib/businesses";
+import { edenBriefs } from "@/content/eden";
 
-/** All indexable routes. /thank-you is deliberately excluded (noindex). */
-const staticRoutes: { path: string; priority: number }[] = [
-  { path: "", priority: 1 },
-  { path: "/accelerator", priority: 0.9 },
-  { path: "/apply", priority: 0.9 },
-  { path: "/projects", priority: 0.8 },
-  { path: "/mentors", priority: 0.8 },
-  { path: "/partner", priority: 0.8 },
-  { path: "/about", priority: 0.7 },
-  { path: "/insights", priority: 0.7 },
-  { path: "/contact", priority: 0.6 },
-  { path: "/privacy", priority: 0.3 },
-  { path: "/terms", priority: 0.3 },
-];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const businesses = await getPublishedBusinesses();
+  const cityNames = new Set(businesses.map((b) => b.city).filter(Boolean));
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const statics: MetadataRoute.Sitemap = [
+    { url: `${site.url}/`, changeFrequency: "daily", priority: 1 },
+    { url: `${site.url}/directory`, changeFrequency: "daily", priority: 0.9 },
+    { url: `${site.url}/functional-medicine`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${site.url}/coaches`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${site.url}/eden`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${site.url}/categories`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${site.url}/cities`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${site.url}/about`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${site.url}/how-it-works`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${site.url}/for-businesses`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${site.url}/contact`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${site.url}/privacy`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${site.url}/terms`, changeFrequency: "yearly", priority: 0.2 },
+  ];
 
   return [
-    ...staticRoutes.map(({ path, priority }) => ({
-      url: `${site.url}${path}`,
-      lastModified: now,
-      priority,
+    ...statics,
+    ...categories.map((c) => ({
+      url: `${site.url}/categories/${c.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
     })),
-    ...projects.map((p) => ({
-      url: `${site.url}/projects/${p.slug}`,
-      lastModified: now,
+    ...cities
+      .filter((c) => cityNames.has(c.name))
+      .map((c) => ({
+        url: `${site.url}/cities/${c.slug}`,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      })),
+    ...edenBriefs.map((b) => ({
+      url: `${site.url}/eden/${b.slug}`,
+      changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    ...insights.map((i) => ({
-      url: `${site.url}/insights/${i.slug}`,
-      // Insight dates are YYYY-MM; anchor to the first of that month.
-      lastModified: new Date(`${i.date}-01`),
-      priority: 0.5,
+    ...businesses.map((b) => ({
+      url: `${site.url}/business/${b.slug}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
     })),
   ];
 }

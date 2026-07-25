@@ -5,21 +5,19 @@ import path from "node:path";
 import { redirect } from "next/navigation";
 
 /**
- * All site forms land here: applications, partner intents, contact.
+ * All site forms land here: contact, business listing requests, and coach
+ * collective applications.
  *
  * Storage strategy (in order):
  *  1. Append to DATA_DIR/submissions.jsonl (attach a Railway volume at
  *     /data and set DATA_DIR=/data to persist across deploys).
  *  2. If SUBMISSIONS_WEBHOOK_URL is set, POST the submission as JSON
- *     (pipe into a spreadsheet, CRM, Slack, or email automation).
- *
- * No third-party form embeds; Iknite controls the data end to end.
+ *     (pipe into Airtable, a CRM, Slack, or email automation).
  */
 
-const KINDS = ["application", "partner", "contact"] as const;
+const KINDS = ["contact", "business", "coach"] as const;
 export type FormKind = (typeof KINDS)[number];
 
-/** Generous cap — the apply essay is the most important field on the site. */
 const MAX_FIELD = 10_000;
 
 function sanitize(value: FormDataEntryValue | null): string {
@@ -67,25 +65,20 @@ export async function submitForm(formData: FormData) {
     : "contact";
 
   // Honeypot: bots fill every field; humans never see this one.
-  // Logged (without content) so false positives are diagnosable.
-  if (sanitize(formData.get("website"))) {
+  if (sanitize(formData.get("website_url"))) {
     console.warn(`[forms] honeypot tripped for kind=${kind} — submission dropped`);
     redirect("/thank-you");
   }
 
   const record: Record<string, string> = {};
   for (const [key, value] of formData.entries()) {
-    if (key.startsWith("_") || key === "website") continue;
+    if (key.startsWith("_") || key === "website_url") continue;
     record[key] = sanitize(value);
   }
 
   // Server-side floor mirrors the client's required fields: never store an
   // entry we cannot act on, even from a direct POST.
-  const invalid =
-    !record.email ||
-    !record.email.includes("@") ||
-    !record.name ||
-    (kind === "application" && record.consent !== "on");
+  const invalid = !record.email || !record.email.includes("@") || !record.name;
   if (invalid) {
     redirect("/thank-you?status=invalid");
   }

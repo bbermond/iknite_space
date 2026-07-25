@@ -20,14 +20,14 @@ export function CornerBracket({
 }
 
 const VARIANTS = {
-  ember: "bg-ember-ink text-paper",
+  fern: "bg-fern text-paper",
   ink: "bg-ink text-paper",
 } as const;
 
 export function BigCta({
   href,
   children,
-  variant = "ember",
+  variant = "fern",
   className = "",
 }: {
   href: string;

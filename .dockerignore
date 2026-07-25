@@ -1,7 +1,7 @@
 node_modules
 .next
 .git
-data
+data/submissions.jsonl
 docs
 *.md
 .env*

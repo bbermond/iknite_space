@@ -1,79 +1,84 @@
 /**
- * Global site configuration.
+ * Global site configuration for FindWellness.
  *
- * This file is the single place to change cohort status, contact details,
- * navigation, and announcement copy. Nothing here is hard-coded into
+ * This file is the single place to change brand copy, contact details,
+ * navigation, and footer architecture. Nothing here is hard-coded into
  * components — edit and redeploy.
  */
 
-export type CohortStatus =
-  | "open" // Applications open  → primary CTA: Apply
-  | "opening-soon" // Applications opening soon → primary CTA: Join waitlist
-  | "waitlist" // Between windows → primary CTA: Join waitlist
-  | "closed"; // Applications closed → primary CTA: Join waitlist
-
-export const cohort = {
-  status: "open" as CohortStatus,
-  /** Displayed everywhere the cohort is referenced. */
-  number: "06",
-  name: "Cohort 06",
-  start: "September 2026",
-  location: "Buea, Cameroon",
-  format: "In person",
-  duration: "6 months",
-  seats: "10 seats",
-  /** Set to a real date string when confirmed; null renders "TBA". */
-  applyDeadline: null as string | null,
-  /** Expected response timeline shown on the apply page. */
-  responseTime: "We review applications on a rolling basis and respond to every applicant.",
-};
-
 export const site = {
-  name: "Iknite Space",
-  tagline: "Tech Talent Accelerator — Buea, Cameroon",
+  name: "FindWellness",
+  region: "South Bay",
+  tagline: "The South Bay's curated guide to modern wellness",
   description:
-    "A selective six-month accelerator in Buea where emerging engineers learn through real projects, mentorship, and real team workflows. Applications open for Cohort 06, starting September 2026.",
-  url: "https://iknite.space",
-  /**
-   * Contact details below are the currently published public ones.
-   * Flagged for confirmation in docs/PENDING_APPROVAL.md before launch.
-   */
-  email: "info@iknite.space",
-  phone: "+237 675 834 309",
-  location: "Buea, South-West Region, Cameroon",
-  social: {
-    github: "https://github.com/Iknite-Space",
-    linkedin: "https://cm.linkedin.com/company/iknite-space",
-    facebook: "https://www.facebook.com/iknite.space",
-  },
-};
+    "366 vetted med spas, longevity clinics, IV lounges, hormone specialists, and weight-loss programs across San Jose, Los Gatos, and the South Bay — researched, rated, and organized so you can choose with confidence.",
+  /** Set NEXT_PUBLIC_SITE_URL on Railway once the custom domain is live. */
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://web-production-fdcc5.up.railway.app",
+  /** Contact happens through the /contact form; set an address to also show it. */
+  email: null as string | null,
+  location: "San Jose · Los Gatos · Silicon Valley, CA",
+} as const;
 
 export const nav = [
-  { href: "/accelerator", label: "Accelerator" },
-  { href: "/projects", label: "Projects" },
-  { href: "/mentors", label: "Mentors" },
-  { href: "/partner", label: "Partner" },
+  { href: "/directory", label: "Directory" },
+  { href: "/functional-medicine", label: "Functional Medicine" },
+  { href: "/coaches", label: "Coaches" },
+  { href: "/eden", label: "Eden" },
   { href: "/about", label: "About" },
-  { href: "/insights", label: "Insights" },
 ] as const;
 
-/** Primary CTA resolves from cohort status — never a dead button. */
-export function primaryCta() {
-  if (cohort.status === "open") {
-    return { href: "/apply", label: `Apply to ${cohort.name}` };
-  }
-  return { href: "/apply", label: "Join the waitlist" };
-}
+export const primaryCta = {
+  href: "/for-businesses",
+  label: "List your practice",
+} as const;
 
-export function statusLine() {
-  switch (cohort.status) {
-    case "open":
-      return `Applications open — ${cohort.name} starts ${cohort.start}`;
-    case "opening-soon":
-      return `Applications opening soon — ${cohort.name} starts ${cohort.start}`;
-    case "waitlist":
-      return `Join the waitlist for ${cohort.name}`;
-    case "closed":
-      return `Applications closed — join the waitlist for the next cohort`;
-  }
-}
+/** Footer link architecture — grouped, deep, and crawlable. */
+export const footerGroups: { title: string; links: { href: string; label: string }[] }[] = [
+  {
+    title: "Explore",
+    links: [
+      { href: "/directory", label: "Browse the directory" },
+      { href: "/categories", label: "All categories" },
+      { href: "/cities", label: "All cities" },
+      { href: "/how-it-works", label: "How it works" },
+      { href: "/functional-medicine", label: "Functional medicine" },
+      { href: "/coaches", label: "Coaches & consultants" },
+      { href: "/eden", label: "Eden — knowledge garden" },
+    ],
+  },
+  {
+    title: "Categories",
+    links: [
+      { href: "/categories/med-spas-aesthetics", label: "Med spas & aesthetics" },
+      { href: "/categories/functional-longevity", label: "Functional & longevity" },
+      { href: "/categories/medical-weight-loss", label: "Medical weight loss" },
+      { href: "/categories/hormone-trt", label: "Hormone & TRT clinics" },
+      { href: "/categories/iv-nutrient-lounges", label: "IV & nutrient lounges" },
+      { href: "/categories/full-service-wellness", label: "Full-service wellness" },
+      { href: "/categories/mobile-iv", label: "Mobile IV providers" },
+    ],
+  },
+  {
+    title: "Cities",
+    links: [
+      { href: "/cities/san-jose", label: "San Jose" },
+      { href: "/cities/los-gatos", label: "Los Gatos" },
+      { href: "/cities/sunnyvale", label: "Sunnyvale" },
+      { href: "/cities/santa-clara", label: "Santa Clara" },
+      { href: "/cities/mountain-view", label: "Mountain View" },
+      { href: "/cities/campbell", label: "Campbell" },
+      { href: "/cities/cupertino", label: "Cupertino" },
+      { href: "/cities", label: "All 17 cities →" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/about", label: "About FindWellness" },
+      { href: "/for-businesses", label: "For businesses" },
+      { href: "/contact", label: "Contact" },
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" },
+    ],
+  },
+];

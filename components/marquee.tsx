@@ -7,7 +7,7 @@ export function Marquee({ items }: { items: readonly string[] }) {
         {row.map((item, i) => (
           <span key={i} className="micro text-ink-soft whitespace-nowrap px-6 flex items-center gap-6">
             {item}
-            <span className="text-ember">+</span>
+            <span className="text-fern">+</span>
           </span>
         ))}
       </div>
