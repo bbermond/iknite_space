@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 import { projects } from "@/content/projects";
-import { insights } from "@/content/insights";
+import { getInsights } from "@/lib/insights";
 
 /** All indexable routes. /thank-you is deliberately excluded (noindex). */
 const staticRoutes: { path: string; priority: number }[] = [
@@ -11,6 +11,7 @@ const staticRoutes: { path: string; priority: number }[] = [
   { path: "/projects", priority: 0.8 },
   { path: "/mentors", priority: 0.8 },
   { path: "/partner", priority: 0.8 },
+  { path: "/sponsor", priority: 0.8 },
   { path: "/about", priority: 0.7 },
   { path: "/insights", priority: 0.7 },
   { path: "/contact", priority: 0.6 },
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       priority: 0.6,
     })),
-    ...insights.map((i) => ({
+    ...getInsights().map((i) => ({
       url: `${site.url}/insights/${i.slug}`,
       // Insight dates are YYYY-MM; anchor to the first of that month.
       lastModified: new Date(`${i.date}-01`),

@@ -41,23 +41,40 @@ export function SectionLabel({
   );
 }
 
+/** Background patterns that demarcate sections (all very low contrast). */
+const PATTERNS = {
+  none: "",
+  dots: "dot-grid-soft",
+  squares: "grid-squares",
+  "stripes-h": "stripes-h",
+  "stripes-v": "stripes-v",
+  hatch: "hatch-soft",
+} as const;
+
+export type SectionPattern = keyof typeof PATTERNS;
+
 /** Standard page section wrapper with the shared container width. */
 export function Section({
   id,
   label,
   index,
+  pattern = "none",
   children,
   className = "",
 }: {
   id?: string;
   label?: string;
   index?: string;
+  pattern?: SectionPattern;
   children: React.ReactNode;
   className?: string;
 }) {
   return (
-    <section id={id} className={`border-t hairline ${className}`}>
-      <div className="mx-auto max-w-6xl px-5 sm:px-10 py-16 sm:py-24">
+    <section id={id} className={`relative border-t hairline ${className}`}>
+      {pattern !== "none" && (
+        <div className={`absolute inset-0 ${PATTERNS[pattern]}`} aria-hidden="true" />
+      )}
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-10 py-16 sm:py-24">
         {label && (
           <Reveal className="mb-10">
             <SectionLabel index={index}>{label}</SectionLabel>

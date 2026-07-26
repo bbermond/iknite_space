@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Decode } from "@/components/decode";
 import { Reveal } from "@/components/reveal";
 import { CtaButton } from "@/components/cta";
 import { Section, PlusCorners } from "@/components/section";
 import { PartnerIntents } from "@/components/partner-intents";
+import { NetworkBanner } from "@/components/graphics";
 import { partnerIntents } from "@/content/partner";
 
 export const metadata: Metadata = {
@@ -26,11 +28,11 @@ export default function PartnerPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight max-w-[17ch]">
-              Build the pipeline with us.
-            </h1>
-          </Reveal>
+          <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight max-w-[17ch]">
+            <Decode text="Build the pipeline" />
+            <br />
+            <Decode text="with us." />
+          </h1>
 
           <Reveal delay={160}>
             <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
@@ -65,6 +67,13 @@ export default function PartnerPage() {
         </div>
       </section>
 
+      {/* ── Talent-flow schematic ────────────────────────────── */}
+      <div className="mx-auto max-w-6xl px-5 sm:px-10 pb-16">
+        <Reveal>
+          <NetworkBanner />
+        </Reveal>
+      </div>
+
       {/* ── The five intents ─────────────────────────────────── */}
       <Section label="Ways in" index="01">
         <div className="grid md:grid-cols-12 gap-10 mb-10">
@@ -88,7 +97,7 @@ export default function PartnerPage() {
       </Section>
 
       {/* ── Names & logos ────────────────────────────────────── */}
-      <Section label="Names & logos" index="02">
+      <Section label="Names & logos" pattern="dots" index="02">
         <div className="relative border hairline wash-ember-strong p-8 sm:p-14">
           <PlusCorners />
           <div className="max-w-[58ch]">

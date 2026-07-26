@@ -135,7 +135,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       </Section>
 
       {/* ── More projects ────────────────────────────────────── */}
-      <Section label="More projects" index="02">
+      <Section label="More projects" pattern="dots" index="02">
         <div className="grid sm:grid-cols-2 border hairline divide-y sm:divide-y-0 sm:divide-x [&>a]:hairline">
           <Link
             href={`/projects/${prev.slug}`}

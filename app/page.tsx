@@ -84,7 +84,7 @@ export default function HomePage() {
       <Marquee items={ticker} />
 
       {/* ── The gap ──────────────────────────────────────────── */}
-      <Section label="The gap" index="01">
+      <Section label="The gap" pattern="squares" index="01">
         <div className="grid md:grid-cols-2 gap-10">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[24ch]">
@@ -196,7 +196,7 @@ export default function HomePage() {
       </Section>
 
       {/* ── Proof ────────────────────────────────────────────── */}
-      <Section label="Proof of work" index="03">
+      <Section label="Proof of work" pattern="dots" index="03">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
@@ -273,7 +273,7 @@ export default function HomePage() {
       </Section>
 
       {/* ── Audience router ──────────────────────────────────── */}
-      <Section label="Find your way in" index="05">
+      <Section label="Find your way in" pattern="stripes-v" index="05">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 border hairline divide-y lg:divide-y-0 sm:divide-x [&>*]:hairline">
           {[
             {
@@ -295,10 +295,10 @@ export default function HomePage() {
               label: "Meet talent",
             },
             {
-              t: "Sponsor / Founder",
-              d: "Back a cohort or build with us as the Space grows.",
-              href: "/partner#sponsor",
-              label: "Partner with us",
+              t: "Sponsor",
+              d: "Back a cohort — ten careers, documented publicly.",
+              href: "/sponsor",
+              label: "Sponsor a cohort",
             },
           ].map((a, i) => (
             <Reveal key={a.t} delay={i * 80}>

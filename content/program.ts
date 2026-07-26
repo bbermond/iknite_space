@@ -87,22 +87,87 @@ export const ticker = [
 ] as const;
 
 export const commitment = [
+  { k: "Piscine", v: "2 weeks, sink or swim — before the program" },
   { k: "Duration", v: "6 months, structured" },
   { k: "Location", v: "Buea, Cameroon — in person, daily" },
   { k: "Cohort size", v: "~10 trainees, selective" },
   { k: "Mentorship", v: "1:1 sessions every two weeks" },
   { k: "Workload", v: "Coursework + team projects + sprints" },
   { k: "Equipment", v: "Personal laptop + GitHub account" },
-  { k: "After the program", v: "Internship & industry transition pathways" },
+  { k: "After the program", v: "6-month internship & industry transition" },
 ] as const;
 
 export const selectionProcess = [
-  { step: "01", title: "Apply", body: "Submit the application with your background and motivation." },
-  { step: "02", title: "Prep work", body: "Shortlisted applicants receive assigned preparatory learning." },
-  { step: "03", title: "Interview", body: "An in-person conversation about your goals and readiness." },
-  { step: "04", title: "Train", body: "Six months of structured coursework, mentorship, and team delivery." },
-  { step: "05", title: "Transition", body: "Internship and industry pathways after the program." },
+  { step: "01", title: "Apply", body: "Submit the application with your background, motivation, and the essay." },
+  { step: "02", title: "Selection", body: "Application review, assigned prep work, and an in-person interview." },
+  { step: "03", title: "Piscine", body: "A two-week sink-or-swim challenge — a test of passion, not skill." },
+  { step: "04", title: "Program", body: "Six months of structured coursework, mentorship, and team delivery." },
+  { step: "05", title: "Internship", body: "Six months inside real work — the bridge into industry." },
 ] as const;
+
+/**
+ * The cohort pipeline — powers the interactive diagram on the home hero.
+ * Stats are verified program facts; blurbs are the hover-card copy.
+ */
+export const pipelineStages = [
+  {
+    id: "apply",
+    num: "01",
+    title: "Apply",
+    duration: "Rolling",
+    statValue: 1,
+    statSuffix: "",
+    statLabel: "essay that matters most",
+    blurb:
+      "Background, motivation, and one essay — written by you, in your own words. Every applicant gets a response.",
+  },
+  {
+    id: "selection",
+    num: "02",
+    title: "Selection",
+    duration: "Weeks",
+    statValue: 10,
+    statSuffix: "",
+    statLabel: "seats per cohort",
+    blurb:
+      "Application review, assigned prep work, and an in-person conversation in Buea. Small on purpose.",
+  },
+  {
+    id: "piscine",
+    num: "03",
+    title: "Piscine",
+    duration: "2 wk",
+    statValue: 2,
+    statSuffix: " wk",
+    statLabel: "sink or swim",
+    blurb:
+      "Two weeks in the deep end before the program begins. A test of passion and persistence — not of what you already know.",
+  },
+  {
+    id: "program",
+    num: "04",
+    title: "Program",
+    duration: "6 mo",
+    statValue: 6,
+    statSuffix: " mo",
+    statLabel: "inside real team workflows",
+    blurb:
+      "Structured coursework, team sprints, code review, demos — with a 1:1 mentor session every two weeks.",
+  },
+  {
+    id: "internship",
+    num: "05",
+    title: "Internship",
+    duration: "6 mo",
+    statValue: 6,
+    statSuffix: " mo",
+    statLabel: "of real work",
+    blurb:
+      "Six months contributing to real projects — the bridge from the program into industry.",
+  },
+] as const;
+
+export type PipelineStage = (typeof pipelineStages)[number];
 
 export const faqs = [
   {
@@ -111,11 +176,11 @@ export const faqs = [
   },
   {
     q: "How long is the program?",
-    a: "The structured accelerator phase is six months, followed by internship and industry transition pathways.",
+    a: "A two-week piscine, then the six-month structured accelerator phase, then a six-month internship into real work.",
   },
   {
     q: "How are trainees selected?",
-    a: "Application review (including a short essay on why you want to be a software engineer), assigned preparatory learning, and an in-person interview. Cohorts are small — around 10 seats — so selection is competitive.",
+    a: "Application review (including a short essay on why you want to be a software engineer), assigned preparatory learning, and an in-person interview — then a two-week piscine, a sink-or-swim challenge that tests passion, not existing skill. Cohorts are small — around 10 seats — so selection is competitive.",
   },
   {
     q: "What do I need?",

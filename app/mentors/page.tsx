@@ -58,7 +58,7 @@ export default function MentorsPage() {
       </section>
 
       {/* ── The roster ───────────────────────────────────────── */}
-      <Section label="The mentors" index="01">
+      <Section label="The mentors" pattern="dots" index="01">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[24ch]">
@@ -124,7 +124,7 @@ export default function MentorsPage() {
       </Section>
 
       {/* ── What mentors do ──────────────────────────────────── */}
-      <Section label="What mentors actually do" index="02">
+      <Section label="What mentors actually do" pattern="stripes-h" index="02">
         <div className="grid sm:grid-cols-3 border hairline divide-y sm:divide-y-0 sm:divide-x [&>div]:hairline">
           {[
             {

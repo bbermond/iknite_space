@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Decode } from "@/components/decode";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
@@ -34,11 +35,9 @@ export default function NotFound() {
           4<span className="text-ember">0</span>4
         </h1>
 
-        <Reveal delay={120}>
-          <p className="mt-6 max-w-[46ch] text-[15px] text-ink-soft">
-            This page doesn&apos;t exist — these do:
-          </p>
-        </Reveal>
+        <p className="mt-6 max-w-[46ch] text-[15px] text-ink-soft">
+          <Decode text="This page doesn't exist — these do:" />
+        </p>
 
         <Reveal delay={200}>
           <ul className="mt-8 max-w-2xl border hairline divide-y [&>li]:hairline bg-paper/80">

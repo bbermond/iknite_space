@@ -6,17 +6,23 @@ import { Reveal } from "@/components/reveal";
 import { CtaButton } from "@/components/cta";
 import { Section } from "@/components/section";
 import { cohort, primaryCta } from "@/content/site";
-import { insights, type Insight } from "@/content/insights";
+import { getInsights, getInsight, type Insight } from "@/lib/insights";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/**
+ * Fully static: every article is prerendered at build time and unknown
+ * slugs 404 — the runtime container never reads content/ from disk.
+ */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return insights.map((entry) => ({ slug: entry.slug }));
+  return getInsights().map((entry) => ({ slug: entry.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const entry = insights.find((e) => e.slug === slug);
+  const entry = getInsight(slug);
   if (!entry) return { title: "Entry not found" };
   return {
     title: entry.title,
@@ -33,12 +39,11 @@ function tagChip(tag: Insight["tag"]) {
 
 export default async function InsightDetailPage({ params }: Props) {
   const { slug } = await params;
-  const entry = insights.find((e) => e.slug === slug);
+  const entry = getInsight(slug);
   if (!entry) notFound();
 
-  const related = [...insights]
+  const related = getInsights()
     .filter((e) => e.slug !== entry.slug)
-    .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 2);
 
   const cta = primaryCta();
@@ -76,21 +81,14 @@ export default async function InsightDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Entry body ───────────────────────────────────────── */}
+      {/* ── Entry body (markdown-rendered at build time) ─────── */}
       <Section label={entry.tag} index="01">
-        <div className="max-w-[62ch] space-y-5">
-          {entry.body.map((paragraph, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <p
-                className={`text-[14px] leading-relaxed ${
-                  i === 0 ? "text-ink" : "text-ink-soft"
-                }`}
-              >
-                {paragraph}
-              </p>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal>
+          <div
+            className="prose-mono"
+            dangerouslySetInnerHTML={{ __html: entry.bodyHtml }}
+          />
+        </Reveal>
       </Section>
 
       {/* ── Related ──────────────────────────────────────────── */}

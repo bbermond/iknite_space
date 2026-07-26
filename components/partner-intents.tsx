@@ -91,6 +91,17 @@ export function PartnerIntents() {
                   <p className="mt-4 text-[14px] text-ink-soft max-w-[52ch]">
                     {intent.body}
                   </p>
+                  {intent.id === "sponsor" && (
+                    <p className="mt-4">
+                      <a
+                        href="/sponsor"
+                        className="micro text-ember no-underline inline-flex items-center gap-1"
+                      >
+                        Full sponsorship details
+                        <span aria-hidden="true">→</span>
+                      </a>
+                    </p>
+                  )}
                   <p className="mt-6 border-l-2 border-ember pl-4 text-[13px] text-ink-soft max-w-[48ch]">
                     <span className="micro text-ink block mb-1">
                       What happens next

@@ -102,7 +102,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* ── Engineering footprint ────────────────────────────── */}
-      <Section label="Engineering footprint" index="02">
+      <Section label="Engineering footprint" pattern="squares" index="02">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
             <Reveal>
@@ -164,7 +164,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* ── For employers ────────────────────────────────────── */}
-      <Section label="For employers" index="03">
+      <Section label="For employers" pattern="dots" index="03">
         <div className="relative border hairline wash-ember-strong p-8 sm:p-14">
           <PlusCorners />
           <div className="max-w-[58ch]">

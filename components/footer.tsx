@@ -44,6 +44,15 @@ export function Footer() {
                   Contact
                 </Link>
               </li>
+              <li className="pt-2">
+                <Link
+                  href="/sponsor"
+                  className="text-[13px] text-ember-soft hover:text-paper no-underline inline-flex items-center gap-2"
+                >
+                  <span className="inline-block w-1.5 h-1.5 bg-ember" aria-hidden="true" />
+                  Sponsor a cohort
+                </Link>
+              </li>
             </ul>
           </nav>
 

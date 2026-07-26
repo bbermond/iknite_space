@@ -23,7 +23,7 @@ npm run lint
 | `content/site.ts` | **Cohort status, dates, CTAs, contact, nav** — the one file to edit between cohorts |
 | `content/program.ts` | Curriculum, learning model, FAQs, commitment facts |
 | `content/projects.ts` | Trainee project case studies |
-| `content/insights.ts` | Updates/articles (the program's public record) |
+| `content/insights/*.md` | Blog articles — **add a .md file to publish** (see `docs/ADDING_ARTICLES.md`) |
 | `content/partner.ts` | Partner-page intents and their forms |
 | `lib/actions.ts` | Form handling (file persist + optional webhook) |
 | `components/` | Design system (reveal, decode, counter, marquee, media slots…) |

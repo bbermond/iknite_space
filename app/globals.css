@@ -151,6 +151,70 @@ textarea:focus-visible,
   );
 }
 
+/* ---- Section demarcation patterns (very low contrast layers) ---- */
+.hatch-soft {
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--color-ink) 8%, transparent) 0 1px,
+    transparent 1px 8px
+  );
+}
+.dot-grid-soft {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-ink) 12%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+.grid-squares {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.stripes-h {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-ink) 5%, transparent) 0 1px,
+    transparent 1px 10px
+  );
+}
+.stripes-v {
+  background-image: repeating-linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-ink) 5%, transparent) 0 1px,
+    transparent 1px 10px
+  );
+}
+
+/* ---- Engineering-paper outer gutters on wide screens.
+       Fixed side rails outside the max-w-6xl column; z-index -1 keeps
+       them behind any opaque section/footer background. ---- */
+@media (min-width: 1440px) {
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc((100vw - 76rem) / 2);
+    z-index: -1;
+    background-image: repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--color-ink) 7%, transparent) 0 1px,
+      transparent 1px 8px
+    );
+  }
+  body::before {
+    left: 0;
+    border-right: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+  body::after {
+    right: 0;
+    border-left: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+}
+
 /* ---- Animated stripe hover for big band CTAs.
        Stripes fade in and march on hover/focus; the global
        reduced-motion rule freezes the march but keeps the fill. ---- */
@@ -197,6 +261,10 @@ textarea:focus-visible,
 }
 .leader > :first-child { order: 1; }
 .leader > :last-child { order: 3; }
+/* Dotted leaders on dark panels */
+.leader-inverse::before {
+  border-bottom-color: color-mix(in srgb, var(--color-paper) 30%, transparent);
+}
 
 /* ---- Marquee ---- */
 .marquee-track {
@@ -218,6 +286,88 @@ textarea:focus-visible,
 }
 .field::placeholder { color: color-mix(in srgb, var(--color-ink) 62%, transparent); }
 .field:focus { border-color: var(--color-ink); outline: 2px solid var(--color-ember-ink); outline-offset: 1px; }
+
+/* ---- Markdown article bodies (insights) — design-language typography ---- */
+.prose-mono {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+  max-width: 62ch;
+}
+.prose-mono > p:first-child {
+  color: var(--color-ink);
+}
+.prose-mono p + p,
+.prose-mono p + ul,
+.prose-mono p + ol,
+.prose-mono ul + p,
+.prose-mono ol + p {
+  margin-top: 1rem;
+}
+.prose-mono h2,
+.prose-mono h3 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.prose-mono h2::before,
+.prose-mono h3::before {
+  content: "// ";
+  color: var(--color-ember-ink);
+}
+.prose-mono ul,
+.prose-mono ol {
+  padding-left: 1.4rem;
+}
+.prose-mono ul { list-style: square; }
+.prose-mono ol { list-style: decimal; }
+.prose-mono li { margin-top: 0.35rem; }
+.prose-mono li::marker { color: var(--color-ember-ink); }
+.prose-mono a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-ember-ink);
+}
+.prose-mono a:hover { color: var(--color-ember-ink); }
+.prose-mono blockquote {
+  margin: 1.25rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-ember);
+  color: var(--color-ink);
+}
+.prose-mono code {
+  background: var(--color-paper-2);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
+}
+.prose-mono pre {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  overflow-x: auto;
+  font-size: 12px;
+}
+.prose-mono pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.prose-mono hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+}
+.prose-mono img {
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+}
 
 /* ---- Reduced motion: everything settles instantly ---- */
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Decode } from "@/components/decode";
 import { Reveal } from "@/components/reveal";
 import { Marquee } from "@/components/marquee";
 import { MediaSlot } from "@/components/media-slot";
@@ -106,11 +107,9 @@ export default function AcceleratorPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight max-w-[17ch]">
-              The accelerator.
-            </h1>
-          </Reveal>
+          <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight max-w-[17ch]">
+            <Decode text="The accelerator." />
+          </h1>
 
           <Reveal delay={160}>
             <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
@@ -151,7 +150,7 @@ export default function AcceleratorPage() {
       </section>
 
       {/* ── Who it's for ─────────────────────────────────────── */}
-      <Section label="Who it's for" index="01">
+      <Section label="Who it's for" pattern="dots" index="01">
         <div className="grid md:grid-cols-2 gap-10 md:gap-14">
           <div>
             <Reveal>
@@ -238,7 +237,7 @@ export default function AcceleratorPage() {
       </Section>
 
       {/* ── Curriculum ───────────────────────────────────────── */}
-      <Section label="Curriculum" index="03">
+      <Section label="Curriculum" pattern="squares" index="03">
         <div className="grid md:grid-cols-2 gap-10 mb-12">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[20ch]">
@@ -337,7 +336,7 @@ export default function AcceleratorPage() {
       </Section>
 
       {/* ── Selection ────────────────────────────────────────── */}
-      <Section label="Selection" index="05">
+      <Section label="Selection" pattern="stripes-h" index="05">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
@@ -410,7 +409,7 @@ export default function AcceleratorPage() {
       </Section>
 
       {/* ── After the program ────────────────────────────────── */}
-      <Section label="After the program" index="07">
+      <Section label="After the program" pattern="hatch" index="07">
         <div className="grid md:grid-cols-2 gap-10 mb-12">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[20ch]">

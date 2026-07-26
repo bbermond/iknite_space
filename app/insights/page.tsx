@@ -5,7 +5,8 @@ import { Reveal } from "@/components/reveal";
 import { CtaButton } from "@/components/cta";
 import { Section } from "@/components/section";
 import { cohort, primaryCta } from "@/content/site";
-import { insights, type Insight } from "@/content/insights";
+import { getInsights, type Insight } from "@/lib/insights";
+import { LogFeed } from "@/components/graphics";
 
 export const metadata: Metadata = {
   title: "Insights",
@@ -22,7 +23,7 @@ function tagChip(tag: Insight["tag"]) {
 
 export default function InsightsPage() {
   const cta = primaryCta();
-  const entries = [...insights].sort((a, b) => b.date.localeCompare(a.date));
+  const entries = getInsights();
 
   return (
     <>
@@ -30,32 +31,37 @@ export default function InsightsPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 dot-grid dot-grid-fade" aria-hidden="true" />
         <div className="absolute inset-0 wash-ember" aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-5 sm:px-10 pt-20 pb-16 sm:pt-28 sm:pb-20">
-          <Reveal>
-            <p className="micro inline-flex items-center gap-2 border hairline-strong bg-paper px-3 py-2">
-              <span className="inline-block w-2 h-2 bg-ember" aria-hidden="true" />
-              Insights
-            </p>
-          </Reveal>
+        <div className="relative mx-auto max-w-6xl px-5 sm:px-10 pt-20 pb-16 sm:pt-28 sm:pb-20 grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7">
+            <Reveal>
+              <p className="micro inline-flex items-center gap-2 border hairline-strong bg-paper px-3 py-2">
+                <span className="inline-block w-2 h-2 bg-ember" aria-hidden="true" />
+                Insights
+              </p>
+            </Reveal>
 
-          <h1 className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight max-w-[17ch]">
-            <Decode text="The program's" />
-            <br />
-            <Decode text="public record." />
-          </h1>
+            <h1 className="mt-8 text-4xl sm:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight max-w-[17ch]">
+              <Decode text="The program's" />
+              <br />
+              <Decode text="public record." />
+            </h1>
 
-          <Reveal delay={150}>
-            <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
-              Cohort selections, program milestones, and announcements —
-              documented as they happen, published in the open. What we did,
-              when we did it. Newest first.
-            </p>
+            <Reveal delay={150}>
+              <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
+                Cohort selections, program milestones, and announcements —
+                documented as they happen, published in the open. What we did,
+                when we did it. Newest first.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={250} className="hidden lg:block lg:col-span-5">
+            <LogFeed />
           </Reveal>
         </div>
       </section>
 
       {/* ── The record ───────────────────────────────────────── */}
-      <Section label="The record" index="01">
+      <Section label="The record" pattern="stripes-v" index="01">
         <div className="border hairline divide-y [&>div]:hairline">
           {entries.map((entry, i) => (
             <Reveal key={entry.slug} delay={Math.min(i, 4) * 70}>

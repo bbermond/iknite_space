@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Decode } from "@/components/decode";
 import { Reveal } from "@/components/reveal";
 import { MediaSlot } from "@/components/media-slot";
 import { CtaButton } from "@/components/cta";
@@ -137,11 +138,9 @@ export default function AboutPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={80}>
-            <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight">
-              About
-            </h1>
-          </Reveal>
+          <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight">
+            <Decode text="About" />
+          </h1>
 
           <Reveal delay={160}>
             <div className="mt-6 max-w-[56ch] space-y-4">
@@ -212,7 +211,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ── [02] How we operate ──────────────────────────────── */}
-      <Section label="How we operate" index="02">
+      <Section label="How we operate" pattern="squares" index="02">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-7">
             <Reveal>
@@ -309,7 +308,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ── [04] History ─────────────────────────────────────── */}
-      <Section label="History" index="04">
+      <Section label="History" pattern="stripes-h" index="04">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <Reveal>
@@ -413,7 +412,7 @@ export default function AboutPage() {
       </Section>
 
       {/* ── [06] The vision ──────────────────────────────────── */}
-      <Section label="The vision" index="06">
+      <Section label="The vision" pattern="dots" index="06">
         <div className="relative border hairline wash-ember-strong p-8 sm:p-14">
           <PlusCorners />
           <div className="max-w-[58ch]">

@@ -13,7 +13,8 @@ safe placeholder framing until confirmed by Bermond.
 | Application deadline | "TBA — apply early" | Real deadline |
 | Seats | "10 seats" (pattern from Cohorts 4–5) | Confirm for Cohort 06 |
 | Tuition / cost | Deliberately not stated; FAQ says "published with the application" | Confirmed tuition/funding model. The old "free until you get a job" and "guaranteed job after a year" claims were **retired** per the brief |
-| Internship | Described as "internship & industry transition pathways" (not guaranteed) | Confirm 6-month internship remains standard |
+| Internship | **6-month internship — confirmed by owner (July 2026)**, described as the bridge into industry, still not framed as a job guarantee | — |
+| Piscine | **2-week sink-or-swim challenge — added at owner's direction (July 2026)**, framed as "a test of passion, not skill" | Confirm exact piscine dates/format for Cohort 06 |
 | Eligibility | Engineering graduates / final-year internship students (+ self-taught encouraged) — from the current site's published criteria | Confirm wording, esp. whether self-taught applicants are formally eligible |
 
 ## People

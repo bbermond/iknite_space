@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { CtaButton } from "@/components/cta";
 import { Section } from "@/components/section";
 import { ApplyForm } from "@/components/apply-form";
+import { ChecklistCard } from "@/components/graphics";
 import { cohort, statusLine } from "@/content/site";
 
 const open = cohort.status === "open";
@@ -86,7 +87,7 @@ export default function ApplyPage() {
       </Section>
 
       {/* ── Before you apply ─────────────────────────────────── */}
-      <Section label="Before you apply" index="02">
+      <Section label="Before you apply" pattern="squares" index="02">
         <div className="grid md:grid-cols-2 gap-10 mb-12">
           <Reveal>
             <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[24ch]">
@@ -153,14 +154,14 @@ export default function ApplyPage() {
       </Section>
 
       {/* ── The process ──────────────────────────────────────── */}
-      <Section label="The process" index="03">
+      <Section label="The process" pattern="stripes-h" index="03">
         <Reveal>
           <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[24ch] mb-10">
-            Four steps. No black box.
+            Five steps. No black box.
           </h2>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 border hairline divide-y lg:divide-y-0 sm:divide-x [&>*]:hairline">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 border hairline divide-y lg:divide-y-0 sm:divide-x [&>*]:hairline">
           {[
             {
               n: "01",
@@ -179,6 +180,11 @@ export default function ApplyPage() {
             },
             {
               n: "04",
+              t: "Piscine",
+              d: "Two weeks, sink or swim — a test of passion, not skill.",
+            },
+            {
+              n: "05",
               t: "Decision",
               d: "A clear yes or no. Every applicant gets a response.",
             },
@@ -219,6 +225,11 @@ export default function ApplyPage() {
                 </p>
               </Reveal>
             )}
+            <Reveal delay={260}>
+              <div className="mt-10 hidden md:block">
+                <ChecklistCard title="Application review" />
+              </div>
+            </Reveal>
           </div>
 
           <div className="md:col-span-7">
