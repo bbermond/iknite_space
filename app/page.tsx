@@ -39,10 +39,10 @@ export default function HomePage() {
           </h1>
 
           <Reveal delay={150}>
-            <p className="mt-6 max-w-[52ch] text-[15px] text-ink-soft">
+            <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
               Iknite Space is a selective, six-month tech talent accelerator in
-              Buea. Learn through real projects, work inside real team systems,
-              and build the skills to contribute beyond the classroom.
+              Buea — where emerging engineers train inside real team systems,
+              and where companies hire juniors who already work like a team.
             </p>
           </Reveal>
 
@@ -80,6 +80,40 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      {/* ── Two doors in ─────────────────────────────────────── */}
+      <div className="border-t hairline">
+        <div className="mx-auto max-w-6xl px-5 sm:px-10 grid sm:grid-cols-2 sm:divide-x divide-y sm:divide-y-0 [&>a]:hairline">
+          <Link
+            href="/apply"
+            className="group flex items-center justify-between gap-4 py-5 sm:pr-8 no-underline hover:bg-paper-2 transition-colors"
+          >
+            <span>
+              <span className="micro text-ember block">For future engineers</span>
+              <span className="text-[15px] font-medium">
+                Train inside a real team
+              </span>
+            </span>
+            <span className="micro text-ink-soft group-hover:text-ember transition-colors whitespace-nowrap">
+              Apply <span aria-hidden="true">→</span>
+            </span>
+          </Link>
+          <Link
+            href="#hire"
+            className="group flex items-center justify-between gap-4 py-5 sm:pl-8 no-underline hover:bg-paper-2 transition-colors"
+          >
+            <span>
+              <span className="micro text-ember block">For employers</span>
+              <span className="text-[15px] font-medium">
+                Hire junior engineers who ship
+              </span>
+            </span>
+            <span className="micro text-ink-soft group-hover:text-ember transition-colors whitespace-nowrap">
+              Why hire from us <span aria-hidden="true">↓</span>
+            </span>
+          </Link>
+        </div>
+      </div>
 
       <Marquee items={ticker} />
 
@@ -149,9 +183,9 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-5 text-[14px] text-ink-soft max-w-[44ch]">
-                Structured coursework, bi-weekly mentorship, team projects, and
-                sprint delivery — the conditions of a real engineering team,
-                before you join one.
+                Four months of mentored, structured training, then two months
+                shipping a team project — the conditions of a real engineering
+                team, before you join one.
               </p>
             </Reveal>
             <Reveal delay={200}>
@@ -239,8 +273,73 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* ── For employers ────────────────────────────────────── */}
+      <Section label="Why hire from Iknite Space" index="04" id="hire" pattern="squares" className="scroll-mt-16">
+        <div className="grid md:grid-cols-2 gap-10">
+          <div>
+            <Reveal>
+              <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[20ch]">
+                Juniors who arrive already working like a team.
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="mt-5 text-[14px] text-ink-soft space-y-4 max-w-[52ch]">
+                <p>
+                  Our engineers complete four months of structured training
+                  with assigned mentors, then two months of team-based product
+                  development on a real project.
+                </p>
+                <p className="text-ink">
+                  By graduation they&apos;ve worked in collaborative
+                  engineering environments, built production-minded software
+                  through Git and Agile workflows, and developed the habits
+                  modern software teams expect.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <CtaButton href="/partner#hire" variant="ember">
+                  Hire or meet talent
+                </CtaButton>
+                <CtaButton href="/projects" variant="ghost">
+                  See their work
+                </CtaButton>
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="grid grid-cols-2 border hairline divide-x divide-y [&>div]:hairline content-start">
+            {[
+              {
+                t: "Git discipline",
+                d: "Branches, pull requests, and code review as daily habit — not theory.",
+              },
+              {
+                t: "Agile delivery",
+                d: "User stories, sprints, stand-ups, and demos across six months.",
+              },
+              {
+                t: "Team collaboration",
+                d: "Four months mentored, two months shipping together on one product.",
+              },
+              {
+                t: "Evidence, not claims",
+                d: "Review the projects, the repos, and how each team actually worked.",
+              },
+            ].map((item, i) => (
+              <Reveal key={item.t} delay={i * 90} className="p-5 sm:p-6 bg-paper">
+                <span className="micro text-ember tabular">[{String(i + 1).padStart(2, "0")}]</span>
+                <h3 className="mt-2 text-[14px] font-medium">{item.t}</h3>
+                <p className="mt-1.5 text-[13px] text-ink-soft">{item.d}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       {/* ── The wider Space ──────────────────────────────────── */}
-      <Section label="The wider Space" index="04">
+      <Section label="The wider Space" index="05">
         <div className="relative border hairline wash-ember-strong p-8 sm:p-14">
           <PlusCorners />
           <div className="max-w-[58ch]">
@@ -273,7 +372,7 @@ export default function HomePage() {
       </Section>
 
       {/* ── Audience router ──────────────────────────────────── */}
-      <Section label="Find your way in" pattern="stripes-v" index="05">
+      <Section label="Find your way in" pattern="stripes-v" index="06">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 border hairline divide-y lg:divide-y-0 sm:divide-x [&>*]:hairline">
           {[
             {

@@ -1,21 +1,22 @@
+import { BrandMark } from "@/components/brand-mark";
+
 /**
- * Text wordmark used until the approved logo files are added.
- * Swap: drop the real logo at public/media/brand/logo.svg and replace
- * this component's contents with an <Image>. See docs/MEDIA_AND_MIGRATION.md.
- *
- * Screen readers get "Iknite Space"; the glyph separator is decorative.
+ * The iknite.space lockup — brand mark + lowercase wordmark, per the
+ * supplied logo files. Purple on paper; paper-white on dark surfaces.
  */
 export function Wordmark({ inverted = false }: { inverted?: boolean }) {
   return (
-    <span
-      className={`micro font-semibold tracking-[0.18em] ${
-        inverted ? "text-paper" : "text-ink"
-      }`}
-    >
+    <span className="inline-flex items-center gap-2">
       <span className="sr-only">Iknite Space</span>
-      <span aria-hidden="true">
-        IKNITE<span className="text-ember">*</span>SPACE
+      <span
+        aria-hidden="true"
+        className={`font-sans font-bold lowercase tracking-tight text-[17px] leading-none ${
+          inverted ? "text-paper" : "text-brand"
+        }`}
+      >
+        iknite.space
       </span>
+      <BrandMark variant="gradient" className="w-5 h-5 shrink-0" />
     </span>
   );
 }

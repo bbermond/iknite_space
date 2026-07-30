@@ -18,6 +18,15 @@
   --color-ember-soft: #ffb25e;
   --color-flare: #ff7a45;
 
+  /* ---- Official brand palette (from the supplied logo & banner files) ----
+     brand        : the deep violet of the wordmark and dark banners
+     brand-orange / brand-mid / brand-red : the mark's gradient stops        */
+  --color-brand: #2e1065;
+  --color-brand-deep: #241048;
+  --color-brand-orange: #f2955a;
+  --color-brand-mid: #f2694f;
+  --color-brand-red: #f83f5c;
+
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 
@@ -76,22 +85,28 @@ body {
   mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
 }
 
-/* ---- Soft ember washes: Iknite warmth over the mono base ---- */
+/* ---- Soft washes in the brand gradient hues ---- */
 .wash-ember {
   background:
-    radial-gradient(90% 70% at 85% 0%, color-mix(in srgb, var(--color-ember) 13%, transparent), transparent 62%),
-    radial-gradient(70% 55% at 8% 100%, color-mix(in srgb, var(--color-ember-soft) 16%, transparent), transparent 60%);
+    radial-gradient(90% 70% at 85% 0%, color-mix(in srgb, var(--color-brand-red) 14%, transparent), transparent 62%),
+    radial-gradient(70% 55% at 8% 100%, color-mix(in srgb, var(--color-brand-orange) 18%, transparent), transparent 60%);
 }
 .wash-ember-strong {
   background:
-    radial-gradient(110% 90% at 80% 10%, color-mix(in srgb, var(--color-ember) 26%, transparent), transparent 64%),
-    radial-gradient(90% 70% at 10% 95%, color-mix(in srgb, var(--color-ember-soft) 30%, transparent), transparent 62%),
+    radial-gradient(110% 90% at 80% 10%, color-mix(in srgb, var(--color-brand-red) 26%, transparent), transparent 64%),
+    radial-gradient(90% 70% at 10% 95%, color-mix(in srgb, var(--color-brand-orange) 32%, transparent), transparent 62%),
     var(--color-paper-2);
 }
 .wash-ink {
   background:
     radial-gradient(100% 80% at 85% 0%, color-mix(in srgb, var(--color-ember) 18%, transparent), transparent 55%),
     var(--color-ink);
+}
+/* Deep-violet brand banner surface (footer, dark panels) */
+.wash-brand {
+  background:
+    radial-gradient(110% 90% at 88% 0%, color-mix(in srgb, var(--color-brand-red) 22%, transparent), transparent 55%),
+    var(--color-brand);
 }
 
 /* ---- Text utilities ---- */

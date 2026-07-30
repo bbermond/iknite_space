@@ -92,7 +92,7 @@ export const commitment = [
   { k: "Location", v: "Buea, Cameroon — in person, daily" },
   { k: "Cohort size", v: "~10 trainees, selective" },
   { k: "Mentorship", v: "1:1 sessions every two weeks" },
-  { k: "Workload", v: "Coursework + team projects + sprints" },
+  { k: "Structure", v: "4 months mentored training + 2 months team project" },
   { k: "Equipment", v: "Personal laptop + GitHub account" },
   { k: "After the program", v: "6-month internship & industry transition" },
 ] as const;
@@ -150,9 +150,9 @@ export const pipelineStages = [
     duration: "6 mo",
     statValue: 6,
     statSuffix: " mo",
-    statLabel: "inside real team workflows",
+    statLabel: "4 training + 2 project",
     blurb:
-      "Structured coursework, team sprints, code review, demos — with a 1:1 mentor session every two weeks.",
+      "Four months of mentored, structured training — then two months focused on your team project. Sprints, code review, and demos throughout.",
   },
   {
     id: "internship",
@@ -176,7 +176,7 @@ export const faqs = [
   },
   {
     q: "How long is the program?",
-    a: "A two-week piscine, then the six-month structured accelerator phase, then a six-month internship into real work.",
+    a: "A two-week piscine, then six months structured as four months of mentored training followed by two months focused on your team project — then a six-month internship into real work.",
   },
   {
     q: "How are trainees selected?",
