@@ -18,14 +18,14 @@
   --color-ember-soft: #ffb25e;
   --color-flare: #ff7a45;
 
-  /* ---- Official brand palette (from the supplied logo & banner files) ----
-     brand        : the deep violet of the wordmark and dark banners
-     brand-orange / brand-mid / brand-red : the mark's gradient stops        */
-  --color-brand: #2e1065;
-  --color-brand-deep: #241048;
-  --color-brand-orange: #f2955a;
-  --color-brand-mid: #f2694f;
-  --color-brand-red: #f83f5c;
+  /* ---- Official brand palette (exact values from the brand SVG exports) ----
+     brand      : the deep violet of the wordmark and dark banners
+     brand-orange → brand-red : the mark's gradient stops                     */
+  --color-brand: #2e0b5d;
+  --color-brand-deep: #22084a;
+  --color-brand-orange: #f99f61;
+  --color-brand-mid: #f96a5b;
+  --color-brand-red: #ff2c5b;
 
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;

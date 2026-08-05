@@ -1,22 +1,18 @@
-import { BrandMark } from "@/components/brand-mark";
+/* eslint-disable @next/next/no-img-element */
 
 /**
- * The iknite.space lockup — brand mark + lowercase wordmark, per the
- * supplied logo files. Purple on paper; paper-white on dark surfaces.
+ * The official iknite.space lockup, served from the brand SVG exports in
+ * public/media/brand. Plain <img> on purpose: a single cached vector
+ * request, no image optimizer in the path, no layout shift.
  */
 export function Wordmark({ inverted = false }: { inverted?: boolean }) {
   return (
-    <span className="inline-flex items-center gap-2">
-      <span className="sr-only">Iknite Space</span>
-      <span
-        aria-hidden="true"
-        className={`font-sans font-bold lowercase tracking-tight text-[17px] leading-none ${
-          inverted ? "text-paper" : "text-brand"
-        }`}
-      >
-        iknite.space
-      </span>
-      <BrandMark variant="gradient" className="w-5 h-5 shrink-0" />
-    </span>
+    <img
+      src={inverted ? "/media/brand/logo-inverted.svg" : "/media/brand/logo-primary.svg"}
+      alt="Iknite Space"
+      width={438}
+      height={183}
+      className={inverted ? "h-9 w-auto" : "h-8 w-auto"}
+    />
   );
 }
