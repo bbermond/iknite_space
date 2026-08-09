@@ -76,7 +76,7 @@ export default function MentorsPage() {
         <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 list-none">
           {mentors.map((m, i) => (
             <Reveal as="li" key={m.slug} delay={(i % 4) * 80}>
-              <div className="group border hairline hover:border-ink transition-colors h-full">
+              <div className="group flex flex-col border hairline hover:border-ink transition-colors h-full">
                 <MediaSlot
                   slot={`mentors/${m.slug}`}
                   alt={`${m.name} — Iknite Space mentor`}
@@ -84,11 +84,18 @@ export default function MentorsPage() {
                   aspect="aspect-square"
                   className="border-0 border-b hairline"
                 />
-                <div className="p-4">
+                <div className="p-4 flex-1">
                   <h3 className="text-[14px] font-medium leading-snug">
                     {m.name}
                   </h3>
-                  <p className="mt-1 micro text-ink-soft">{m.role}</p>
+                  {(m.title || m.org) && (
+                    <p className="mt-1 micro text-ember">
+                      {[m.title, m.org].filter(Boolean).join(" — ")}
+                    </p>
+                  )}
+                  <p className="mt-2 text-[12px] leading-relaxed text-ink-soft">
+                    {m.bio}
+                  </p>
                 </div>
               </div>
             </Reveal>
