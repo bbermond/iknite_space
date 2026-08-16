@@ -28,7 +28,9 @@ npm run lint
 | `lib/actions.ts` | Form handling (file persist + optional webhook) |
 | `components/` | Design system (reveal, decode, counter, marquee, media slots…) |
 | `public/media/` | Drop approved photos here — see `docs/MEDIA_AND_MIGRATION.md` |
+| `docs/BACKLOG.md` | **Start here** — open items, handoff notes, gotchas |
 | `docs/PENDING_APPROVAL.md` | Facts that need confirmation before/after launch |
+| `docs/ADDING_ARTICLES.md` | How to publish a blog article |
 | `docs/DEPLOY_RAILWAY.md` | Deployment guide |
 
 ## Content rules
