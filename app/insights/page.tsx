@@ -96,10 +96,10 @@ export default function InsightsPage() {
       </Section>
 
       {/* ── Closing CTA ──────────────────────────────────────── */}
-      <section className="border-t hairline">
-        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-16 sm:py-20 relative overflow-hidden text-center">
-          <div className="absolute inset-0 dot-grid" aria-hidden="true" />
-          <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+      <section className="relative overflow-hidden border-t hairline">
+        <div className="absolute inset-0 dot-grid" aria-hidden="true" />
+        <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-16 sm:py-20 text-center relative">
           <div className="relative">
             <Reveal>
               <p className="micro text-ink-soft">

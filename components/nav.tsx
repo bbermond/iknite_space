@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { nav, primaryCta } from "@/content/site";
 import { Wordmark } from "@/components/wordmark";
+import { TrackSwitch } from "@/components/track-switch";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ export function Nav() {
           <Wordmark />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7" aria-label="Primary">
+        <nav className="hidden md:flex items-center gap-6" aria-label="Primary">
           {nav.map((item) => {
             const active = pathname.startsWith(item.href);
             return (
@@ -42,17 +43,21 @@ export function Nav() {
           >
             {cta.label}
           </Link>
+          <TrackSwitch />
         </nav>
 
-        <button
-          type="button"
-          className="md:hidden micro border hairline-strong px-3 py-2"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <TrackSwitch />
+          <button
+            type="button"
+            className="micro border hairline-strong px-3 py-2"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
       </div>
 
       <nav

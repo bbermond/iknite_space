@@ -8,7 +8,9 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden wash-brand text-paper mt-24">
+    // `on-brand` pins paper/ink to fixed light values: this surface is
+    // deep violet in BOTH tracks, so it must not follow the inversion.
+    <footer className="on-brand relative overflow-hidden wash-brand text-paper mt-24">
       <BrandBlocks tone="dark" />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">

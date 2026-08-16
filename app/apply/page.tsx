@@ -5,7 +5,9 @@ import { CtaButton } from "@/components/cta";
 import { Section } from "@/components/section";
 import { ApplyForm } from "@/components/apply-form";
 import { ChecklistCard } from "@/components/graphics";
+import { Track } from "@/components/track";
 import { cohort, statusLine } from "@/content/site";
+import { tracks, type TrackContent } from "@/content/tracks";
 
 const open = cohort.status === "open";
 
@@ -15,6 +17,31 @@ export const metadata: Metadata = {
     ? `Apply to ${cohort.name} — a selective six-month accelerator in ${cohort.location}. Application, essay, prep work, and an in-person interview. Every applicant gets a response.`
     : `Applications for ${cohort.name} are not open right now. Join the waitlist and we will contact you when the next application window opens.`,
 };
+
+/** Entry criteria are the one part of the digest that differs by craft. */
+function EligibilityList({ t }: { t: TrackContent }) {
+  return (
+    <ul className="mt-4 space-y-3 text-[13px] text-ink-soft">
+      {t.eligibility.map((item) => (
+        <li key={item.tag} className="flex gap-3">
+          <span className="text-ember" aria-hidden="true">
+            +
+          </span>
+          <span>{item.body}</span>
+        </li>
+      ))}
+      <li className="flex gap-3">
+        <span className="text-ember" aria-hidden="true">
+          +
+        </span>
+        <span>
+          Applying to the other track? Switch the lens in the header — the
+          criteria change with it.
+        </span>
+      </li>
+    </ul>
+  );
+}
 
 export default function ApplyPage() {
   return (
@@ -107,20 +134,10 @@ export default function ApplyPage() {
         <div className="grid sm:grid-cols-2 border hairline divide-y sm:divide-y-0 sm:divide-x [&>div]:hairline">
           <Reveal className="p-6 sm:p-8">
             <h3 className="micro text-ember">Eligibility</h3>
-            <ul className="mt-4 space-y-3 text-[13px] text-ink-soft">
-              {[
-                "Engineering graduates from a higher institution or university.",
-                "Final-year engineering students on internship.",
-                "Self-taught learners and career switchers with equivalent foundations — encouraged to apply. Tell your story in the essay.",
-              ].map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="text-ember" aria-hidden="true">
-                    +
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+            <Track
+              code={<EligibilityList t={tracks.code} />}
+              design={<EligibilityList t={tracks.design} />}
+            />
           </Reveal>
 
           <Reveal delay={100} className="p-6 sm:p-8">

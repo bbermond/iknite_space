@@ -6,15 +6,11 @@ import { MediaSlot } from "@/components/media-slot";
 import { CtaButton } from "@/components/cta";
 import { BigCta } from "@/components/big-cta";
 import { Section, PlusCorners } from "@/components/section";
+import { Track, TrackWord } from "@/components/track";
+import { Banner } from "@/components/banner";
 import { cohort, primaryCta, statusLine } from "@/content/site";
-import {
-  learningModel,
-  curriculum,
-  ticker,
-  commitment,
-  selectionProcess,
-  faqs,
-} from "@/content/program";
+import { commitment, selectionProcess, getFaqs } from "@/content/program";
+import { tracks, type TrackContent } from "@/content/tracks";
 
 export const metadata: Metadata = {
   title: "Accelerator",
@@ -22,43 +18,28 @@ export const metadata: Metadata = {
     "A selective six-month accelerator in Buea: structured coursework, bi-weekly 1:1 mentorship, team projects, and sprint delivery — with internship and industry transition pathways after.",
 };
 
-const eligibility = [
-  {
-    tag: "Graduates",
-    body: "Engineering graduates from higher institutions and universities.",
-  },
-  {
-    tag: "Final-year",
-    body: "Final-year engineering students completing their internship period.",
-  },
-  {
-    tag: "Self-taught",
-    body: "Self-taught learners and career switchers with equivalent foundations — make your case in the application essay.",
-  },
-];
-
-const requirements = [
-  {
-    t: "Personal laptop",
-    d: "Your own machine, set up as your daily workshop.",
-  },
-  {
-    t: "GitHub account",
-    d: "Your work lives in version control from day one.",
-  },
-  {
-    t: "Based in Buea",
-    d: "In-person attendance, daily, for the full program.",
-  },
-  {
-    t: "Real commitment",
-    d: "Coursework, team projects, sprints — six months of showing up.",
-  },
-];
+/** Only the second row differs between crafts — the tool the work lives in. */
+function requirementsFor(t: TrackContent) {
+  return [
+    {
+      t: "Personal laptop",
+      d: "Your own machine, set up as your daily workshop.",
+    },
+    t.toolRequirement,
+    {
+      t: "Based in Buea",
+      d: "In-person attendance, daily, for the full program.",
+    },
+    {
+      t: "Real commitment",
+      d: "Coursework, team projects, sprints — six months of showing up.",
+    },
+  ];
+}
 
 const mentorshipFacts = [
   ["Cadence", "1:1 sessions every two weeks"],
-  ["Who mentors", "Working engineers and practitioners"],
+  ["Who mentors", "Working practitioners in your craft"],
   ["What happens", "Work review, real-world context, guidance"],
 ];
 
@@ -90,6 +71,136 @@ const pathways = [
   },
 ];
 
+/* Craft-specific sections, written once against a track and rendered
+   for both lenses — see components/track.tsx. */
+
+function AudiencePanel({ t }: { t: TrackContent }) {
+  return (
+    <div className="grid md:grid-cols-2 gap-10 md:gap-14">
+      <div>
+        <Reveal>
+          <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
+            {t.audienceHeadline}
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="mt-5 text-[14px] text-ink-soft max-w-[52ch]">{t.audienceBody}</p>
+        </Reveal>
+
+        <div className="mt-8 border hairline divide-y [&>*]:hairline">
+          {t.eligibility.map((e, i) => (
+            <Reveal
+              key={e.tag}
+              delay={i * 90}
+              className="grid grid-cols-[6.5rem_1fr] gap-4 p-5"
+            >
+              <span className="micro text-ember pt-0.5">{e.tag}</span>
+              <p className="text-[13px] text-ink-soft">{e.body}</p>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <Reveal delay={150}>
+        <div className="relative border hairline p-6 sm:p-8 h-full">
+          <PlusCorners />
+          <p className="micro text-ember">What you need</p>
+          <ul className="mt-6 divide-y [&>li]:hairline">
+            {requirementsFor(t).map((r) => (
+              <li key={r.t} className="py-4 first:pt-0 last:pb-0">
+                <div className="flex items-baseline gap-3">
+                  <span className="text-ember" aria-hidden="true">
+                    +
+                  </span>
+                  <div>
+                    <h3 className="text-[14px] font-medium">{r.t}</h3>
+                    <p className="mt-1 text-[13px] text-ink-soft">{r.d}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+    </div>
+  );
+}
+
+function LearningGrid({ t }: { t: TrackContent }) {
+  return (
+    <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 border hairline">
+      {t.learningModel.map((step, i) => (
+        <Reveal
+          as="li"
+          key={step.step}
+          delay={i * 70}
+          className="bg-paper p-6 hover:bg-paper-2 transition-colors"
+        >
+          <span className="micro text-ember tabular">{step.step}</span>
+          <h3 className="mt-3 text-[15px] font-medium">{step.title}</h3>
+          <p className="mt-2 text-[13px] text-ink-soft">{step.body}</p>
+        </Reveal>
+      ))}
+    </ol>
+  );
+}
+
+function CurriculumGrid({ t }: { t: TrackContent }) {
+  return (
+    <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-ink/10 border hairline">
+      {t.curriculum.map((group, i) => (
+        <Reveal
+          key={group.label}
+          delay={i * 80}
+          className={`bg-paper p-5 ${
+            i === t.curriculum.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""
+          }`}
+        >
+          <h3 className="micro text-ember">{group.label}</h3>
+          <ul className="mt-4">
+            {group.items.map((item) => (
+              <li
+                key={item}
+                className="text-[13px] text-ink-soft border-b hairline py-2 last:border-b-0"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
+function FaqList({ t }: { t: TrackContent }) {
+  return (
+    <div className="border hairline divide-y [&>*]:hairline">
+      {getFaqs(t).map((f, i) => (
+        <Reveal key={f.q} delay={i * 60}>
+          <details className="group">
+            <summary className="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:px-6 [&::-webkit-details-marker]:hidden hover:bg-paper-2 transition-colors">
+              <span className="flex items-baseline gap-4">
+                <span className="micro text-ink-soft tabular">Q{i + 1}</span>
+                <span className="text-[14px] font-medium">{f.q}</span>
+              </span>
+              <span
+                className="text-ember transition-transform group-open:rotate-45"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </summary>
+            <p className="px-5 sm:px-6 pb-5 text-[13px] text-ink-soft max-w-[62ch]">
+              {f.a}
+            </p>
+          </details>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
 export default function AcceleratorPage() {
   const cta = primaryCta();
 
@@ -113,10 +224,10 @@ export default function AcceleratorPage() {
 
           <Reveal delay={160}>
             <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
-              Six months inside the conditions of a real engineering team:
-              structured coursework, bi-weekly 1:1 mentorship, team projects,
-              and sprint delivery — building work you can show, and habits a
-              team can rely on.
+              <TrackWord
+                code={tracks.code.acceleratorLede}
+                design={tracks.design.acceleratorLede}
+              />
             </p>
           </Reveal>
 
@@ -151,57 +262,10 @@ export default function AcceleratorPage() {
 
       {/* ── Who it's for ─────────────────────────────────────── */}
       <Section label="Who it's for" pattern="dots" index="01">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14">
-          <div>
-            <Reveal>
-              <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
-                For engineers at the start of the climb.
-              </h2>
-            </Reveal>
-            <Reveal delay={100}>
-              <p className="mt-5 text-[14px] text-ink-soft max-w-[52ch]">
-                The program is built for people who already have foundations
-                and want the team layer on top: workflows, reviews, delivery,
-                and judgment.
-              </p>
-            </Reveal>
-
-            <div className="mt-8 border hairline divide-y [&>*]:hairline">
-              {eligibility.map((e, i) => (
-                <Reveal
-                  key={e.tag}
-                  delay={i * 90}
-                  className="grid grid-cols-[6.5rem_1fr] gap-4 p-5"
-                >
-                  <span className="micro text-ember pt-0.5">{e.tag}</span>
-                  <p className="text-[13px] text-ink-soft">{e.body}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          <Reveal delay={150}>
-            <div className="relative border hairline p-6 sm:p-8 h-full">
-              <PlusCorners />
-              <p className="micro text-ember">What you need</p>
-              <ul className="mt-6 divide-y [&>li]:hairline">
-                {requirements.map((r) => (
-                  <li key={r.t} className="py-4 first:pt-0 last:pb-0">
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-ember" aria-hidden="true">
-                        +
-                      </span>
-                      <div>
-                        <h3 className="text-[14px] font-medium">{r.t}</h3>
-                        <p className="mt-1 text-[13px] text-ink-soft">{r.d}</p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
+        <Track
+          code={<AudiencePanel t={tracks.code} />}
+          design={<AudiencePanel t={tracks.design} />}
+        />
       </Section>
 
       {/* ── The learning model ───────────────────────────────── */}
@@ -220,20 +284,10 @@ export default function AcceleratorPage() {
           </Reveal>
         </div>
 
-        <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 border hairline">
-          {learningModel.map((step, i) => (
-            <Reveal
-              as="li"
-              key={step.step}
-              delay={i * 70}
-              className="bg-paper p-6 hover:bg-paper-2 transition-colors"
-            >
-              <span className="micro text-ember tabular">{step.step}</span>
-              <h3 className="mt-3 text-[15px] font-medium">{step.title}</h3>
-              <p className="mt-2 text-[13px] text-ink-soft">{step.body}</p>
-            </Reveal>
-          ))}
-        </ol>
+        <Track
+          code={<LearningGrid t={tracks.code} />}
+          design={<LearningGrid t={tracks.design} />}
+        />
       </Section>
 
       {/* ── Curriculum ───────────────────────────────────────── */}
@@ -253,32 +307,19 @@ export default function AcceleratorPage() {
           </Reveal>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-ink/10 border hairline">
-          {curriculum.map((group, i) => (
-            <Reveal
-              key={group.label}
-              delay={i * 80}
-              className={`bg-paper p-5 ${
-                i === curriculum.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""
-              }`}
-            >
-              <h3 className="micro text-ember">{group.label}</h3>
-              <ul className="mt-4">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="text-[13px] text-ink-soft border-b hairline py-2 last:border-b-0"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
+        <Track
+          code={<CurriculumGrid t={tracks.code} />}
+          design={<CurriculumGrid t={tracks.design} />}
+        />
       </Section>
 
-      <Marquee items={ticker} />
+      {/* The craft's own vocabulary, on the brand gradient. */}
+      <Banner tone="gradient" padded={false}>
+        <Track
+          code={<Marquee items={tracks.code.ticker} />}
+          design={<Marquee items={tracks.design.ticker} />}
+        />
+      </Banner>
 
       {/* ── Mentorship ───────────────────────────────────────── */}
       <Section label="Mentorship" index="04">
@@ -286,15 +327,18 @@ export default function AcceleratorPage() {
           <div className="md:col-span-7">
             <Reveal>
               <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
-                A working engineer in your corner.
+                <TrackWord
+                  code={tracks.code.mentorHeadline}
+                  design={tracks.design.mentorHeadline}
+                />
               </h2>
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-5 text-[14px] text-ink-soft max-w-[52ch]">
-                Every trainee meets a mentor in structured 1:1 sessions every
-                two weeks across the six months — working engineers and
-                practitioners who review your work, share real-world context,
-                and pressure-test your decisions.
+                <TrackWord
+                  code={tracks.code.mentorBody}
+                  design={tracks.design.mentorBody}
+                />
               </p>
             </Reveal>
 
@@ -473,40 +517,19 @@ export default function AcceleratorPage() {
           </div>
 
           <div className="md:col-span-8">
-            <div className="border hairline divide-y [&>*]:hairline">
-              {faqs.map((f, i) => (
-                <Reveal key={f.q} delay={i * 60}>
-                  <details className="group">
-                    <summary className="flex items-center justify-between gap-4 cursor-pointer list-none p-5 sm:px-6 [&::-webkit-details-marker]:hidden hover:bg-paper-2 transition-colors">
-                      <span className="flex items-baseline gap-4">
-                        <span className="micro text-ink-soft tabular">
-                          Q{i + 1}
-                        </span>
-                        <span className="text-[14px] font-medium">{f.q}</span>
-                      </span>
-                      <span
-                        className="text-ember transition-transform group-open:rotate-45"
-                        aria-hidden="true"
-                      >
-                        +
-                      </span>
-                    </summary>
-                    <p className="px-5 sm:px-6 pb-5 text-[13px] text-ink-soft max-w-[62ch]">
-                      {f.a}
-                    </p>
-                  </details>
-                </Reveal>
-              ))}
-            </div>
+            <Track
+              code={<FaqList t={tracks.code} />}
+              design={<FaqList t={tracks.design} />}
+            />
           </div>
         </div>
       </Section>
 
       {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="border-t hairline">
-        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 dot-grid" aria-hidden="true" />
-          <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+      <section className="relative overflow-hidden border-t hairline">
+        <div className="absolute inset-0 dot-grid" aria-hidden="true" />
+        <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 text-center relative">
           <div className="relative">
             <Reveal>
               <p className="micro text-ink-soft">{statusLine()}</p>

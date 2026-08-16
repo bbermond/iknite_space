@@ -5,6 +5,7 @@ import { CtaButton } from "@/components/cta";
 import { Section, PlusCorners } from "@/components/section";
 import { PartnerIntents } from "@/components/partner-intents";
 import { NetworkBanner } from "@/components/graphics";
+import { PartnerLogos } from "@/components/partner-logos";
 import { partnerIntents } from "@/content/partner";
 
 export const metadata: Metadata = {
@@ -98,6 +99,24 @@ export default function PartnerPage() {
 
       {/* ── Names & logos ────────────────────────────────────── */}
       <Section label="Names & logos" pattern="dots" index="02">
+        <div className="grid md:grid-cols-12 gap-10 mb-10">
+          <Reveal className="md:col-span-6">
+            <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
+              Who we work with.
+            </h2>
+          </Reveal>
+          <Reveal delay={120} className="md:col-span-6">
+            <p className="text-[14px] text-ink-soft max-w-[46ch]">
+              Organisations with a current, documented relationship with Iknite
+              Space — across studio work, community, and events in Buea.
+            </p>
+          </Reveal>
+        </div>
+
+        <Reveal delay={160} className="mb-14">
+          <PartnerLogos />
+        </Reveal>
+
         <div className="relative border hairline wash-ember-strong p-8 sm:p-14">
           <PlusCorners />
           <div className="max-w-[58ch]">

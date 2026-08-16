@@ -40,7 +40,7 @@ export const partnerIntents: PartnerIntent[] = [
   {
     id: "sponsor",
     label: "Sponsor a cohort",
-    headline: "Fund practical engineering capacity in Buea.",
+    headline: "Fund practical technology capacity in Buea.",
     body: "Sponsorship supports a transparent, documented program: small cohorts, real projects, published updates. Support a cohort, equipment, or the infrastructure of the future Space.",
     expectation: "We reply with the program model, current needs, and reporting approach.",
     fields: [

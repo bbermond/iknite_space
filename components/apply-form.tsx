@@ -1,5 +1,6 @@
 import { cohort } from "@/content/site";
 import { submitForm } from "@/lib/actions";
+import { ApplyTrackFields } from "@/components/apply-track-fields";
 
 /**
  * Application form for the current cohort. Server component — submitForm
@@ -8,13 +9,6 @@ import { submitForm } from "@/lib/actions";
  * When cohort.status !== "open" the same form collapses to a short
  * waitlist capture (name, email, city, consent) with waitlist wording.
  */
-
-const EDUCATION_OPTIONS = [
-  "Engineering graduate",
-  "Final-year engineering student",
-  "Self-taught / career switcher",
-  "Other",
-] as const;
 
 const REFERRAL_OPTIONS = [
   "Friend or colleague",
@@ -126,62 +120,7 @@ export function ApplyForm() {
 
       {open && (
         <>
-          <div>
-            <FieldLabel htmlFor="apply-education">
-              Education background
-            </FieldLabel>
-            <select
-              id="apply-education"
-              name="education"
-              required
-              defaultValue=""
-              className="field"
-            >
-              <option value="" disabled>
-                Select your background
-              </option>
-              {EDUCATION_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <FieldLabel htmlFor="apply-github" optional>
-              GitHub profile URL
-            </FieldLabel>
-            <input
-              id="apply-github"
-              type="url"
-              name="github"
-              autoComplete="url"
-              placeholder="https://github.com/username"
-              className="field"
-            />
-            <Help>
-              Optional, but encouraged — we look at code, not just claims.
-            </Help>
-          </div>
-
-          <div>
-            <FieldLabel htmlFor="apply-essay">
-              Why do you want to become a software engineer?
-            </FieldLabel>
-            <textarea
-              id="apply-essay"
-              name="essay"
-              rows={8}
-              required
-              maxLength={10000}
-              className="field"
-            />
-            <Help>
-              Write it yourself, in your own words. Be honest and specific —
-              this is where we get to know you.
-            </Help>
-          </div>
+          <ApplyTrackFields />
 
           <div>
             <FieldLabel htmlFor="apply-referral" optional>

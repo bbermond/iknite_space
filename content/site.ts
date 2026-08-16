@@ -32,7 +32,7 @@ export const site = {
   name: "Iknite Space",
   tagline: "Tech Talent Accelerator — Buea, Cameroon",
   description:
-    "A selective six-month accelerator in Buea where emerging engineers learn through real projects, mentorship, and real team workflows. Applications open for Cohort 06, starting September 2026.",
+    "A selective six-month accelerator in Buea where emerging engineers and designers learn through real projects, mentorship, and real team workflows. Applications open for Cohort 06, starting September 2026.",
   url: "https://iknite.space",
   /**
    * Contact details below are the currently published public ones.

@@ -71,5 +71,5 @@ export const mentorModel = [
     v: "1:1 sessions every two weeks, across the full six months",
   },
   { k: "Format", v: "Review work, question decisions, share real-world context" },
-  { k: "Who mentors", v: "Working engineers and practitioners — in Cameroon and the diaspora" },
+  { k: "Who mentors", v: "Working engineers and designers — in Cameroon and the diaspora" },
 ] as const;

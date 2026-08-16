@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { MediaSlot } from "@/components/media-slot";
 import { CtaButton } from "@/components/cta";
 import { Section, PlusCorners } from "@/components/section";
+import { Banner } from "@/components/banner";
 import { cohort, site, primaryCta } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ const operatingPrinciples = [
   },
   {
     n: "04",
-    t: "Communication as engineering",
+    t: "Communication as craft",
     d: "Stand-ups, written updates, and public demos are treated as core discipline, not soft extras.",
   },
   {
@@ -146,7 +147,7 @@ export default function AboutPage() {
             <div className="mt-6 max-w-[56ch] space-y-4">
               <p className="text-[16px] sm:text-[18px] leading-relaxed">
                 Iknite Space exists because completing a course is not the same
-                as contributing to a real engineering team.
+                as contributing to a real product team.
               </p>
               <p className="text-[15px] text-ink-soft">
                 The accelerator closes that gap the only way it closes: through
@@ -216,7 +217,7 @@ export default function AboutPage() {
           <div className="md:col-span-7">
             <Reveal>
               <h2 className="text-2xl sm:text-4xl font-medium leading-tight max-w-[22ch]">
-                Run like an engineering team, because it is one.
+                Run like a product team, because it is one.
               </h2>
             </Reveal>
 
@@ -412,51 +413,51 @@ export default function AboutPage() {
       </Section>
 
       {/* ── [06] The vision ──────────────────────────────────── */}
-      <Section label="The vision" pattern="dots" index="06">
-        <div className="relative border hairline wash-ember-strong p-8 sm:p-14">
-          <PlusCorners />
-          <div className="max-w-[58ch]">
-            <Reveal>
-              <p className="micro text-ember mb-4">We are building</p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h2 className="text-2xl sm:text-4xl font-medium leading-tight">
-                The wider Space: a reliable home for talent and ventures in
-                Buea.
-              </h2>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mt-5 text-[14px] text-ink-soft">
-                The accelerator is the operating foundation. The next phase is
-                the physical environment around it — infrastructure that makes
-                serious technology work dependable in Buea.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 border hairline">
-            {visionFacilities.map((f, i) => (
-              <Reveal key={f.t} delay={i * 70} className="bg-paper p-5">
-                <h3 className="text-[14px] font-medium">{f.t}</h3>
-                <p className="mt-2 text-[13px] text-ink-soft">{f.d}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={200}>
-            <p className="mt-8 text-[13px] text-ink max-w-[58ch]">
-              None of this is offered as an available facility today. We
-              announce each part when it opens — not before.
+      {/* The vision is the site's spectrum band, here and on the home
+          page — same surface, same statement, wherever it appears. */}
+      <Banner tone="spectrum">
+        <div className="max-w-[58ch]">
+          <Reveal>
+            <p className="micro mb-4 opacity-80">
+              [06] — The vision · We are building
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="text-2xl sm:text-4xl font-medium leading-tight tracking-tight">
+              The wider Space: a reliable home for talent and ventures in Buea.
+            </h2>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mt-5 text-[14px] text-ink-soft">
+              The accelerator is the operating foundation. The next phase is
+              the physical environment around it — infrastructure that makes
+              serious technology work dependable in Buea.
             </p>
           </Reveal>
         </div>
-      </Section>
+
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/20 border hairline-strong">
+          {visionFacilities.map((f, i) => (
+            <Reveal key={f.t} delay={i * 70} className="bg-paper/10 p-5">
+              <h3 className="text-[14px] font-medium">{f.t}</h3>
+              <p className="mt-2 text-[13px] text-ink-soft">{f.d}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200}>
+          <p className="mt-8 text-[13px] max-w-[58ch]">
+            None of this is offered as an available facility today. We announce
+            each part when it opens — not before.
+          </p>
+        </Reveal>
+      </Banner>
 
       {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="border-t hairline">
-        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 dot-grid" aria-hidden="true" />
-          <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+      <section className="relative overflow-hidden border-t hairline">
+        <div className="absolute inset-0 dot-grid" aria-hidden="true" />
+        <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 text-center relative">
           <div className="relative">
             <Reveal>
               <p className="micro text-ink-soft">

@@ -10,7 +10,10 @@ then each slot shows a styled placeholder naming the shot it wants.
 
 | Slot path (`public/media/…`) | Wanted shot |
 |---|---|
-| `brand/logo.svg` | Approved Iknite Space logo (then swap `components/wordmark.tsx` to render it) |
+| `partners/iknite-studio.svg` | Iknite Studio logo — see **Partner logos** below |
+| `partners/mountain-hub.svg` | Mountain Hub logo |
+| `partners/moulingo.svg` | Moulingo logo |
+| `partners/cimfest.svg` | CimFest logo |
 | `projects/cribconnect.jpg` | CribConnect on a real screen, or the team demoing it |
 | `projects/qless.jpg` | Qless on a real screen, or the team at work |
 | `projects/auto-link.jpg` | Auto Link team / demo |
@@ -37,6 +40,50 @@ Good sources: the old site repo (`Iknite-Space/iknite-space.github.io`) holds
 historical media for Cohorts 4–5, Gophers meetups, Design Meetups, Qless,
 CribConnect, mentor sessions, and group work. Also the
 `Iknite_space assets` folder on the Iknite Studio shared drive.
+
+## Partner logos
+
+The strip on the home page and `/partner` is driven by
+`content/partners.ts` and rendered by `components/partner-logos.tsx`.
+
+**To add a logo:** drop the file at `public/media/partners/<slug>.svg`
+(`.png`, `.webp`, and `.jpg` also resolve, in that order of preference) and
+rebuild. Nothing in the code needs to change — a partner without a file
+renders its name as a typographic placeholder in the site's own design
+language, so the strip never looks broken while you wait on assets.
+
+**Dark surfaces.** The design track inverts the page to near-black, which
+swallows dark logos. Each partner carries an `onDark` setting:
+
+| `onDark` | Behaviour | Use when |
+|---|---|---|
+| `"plate"` *(default)* | Sits the mark on a small light panel | Full-colour logos — always safe |
+| `"invert"` | CSS-inverts the mark to white | Single-colour black marks only |
+| `"asset"` | Uses `partners/<slug>-inverted.svg` | You have a real light-on-dark export — best result |
+
+`"asset"` falls back to `"plate"` if the `-inverted` file is missing, so it
+is safe to set ahead of receiving the export.
+
+**Adding or removing a partner** is a one-line edit to the array in
+`content/partners.ts`. Entries carry a name and an optional `href` only —
+per the site's content rules, no descriptor or relationship claim is
+published for a partner until it is confirmed.
+
+## Brand lockups
+
+Three exports live in `public/media/brand/`:
+
+| File | Type colour | Mark | Used on |
+|---|---|---|---|
+| `logo-primary.svg` | brand violet | gradient | paper surfaces (code track) |
+| `logo-on-dark.svg` | white | gradient | the design track's dark surface |
+| `logo-inverted.svg` | white | white | the brand-violet footer, both tracks |
+
+`logo-on-dark.svg` is derived from `logo-primary.svg` by recolouring only
+the twelve wordmark paths (`fill: #2e0b5d` → `#fdfbff`); the mark's gradient
+stops are untouched. If an official light-on-dark export with the gradient
+mark arrives, replace that file directly — the filename is what
+`components/wordmark.tsx` looks for.
 
 ## Legacy content migration
 
