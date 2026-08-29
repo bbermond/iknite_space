@@ -80,6 +80,17 @@ consolidate here.
   trainees consent.
 - Analytics — no provider wired yet (brief lists events worth tracking).
 
+### Hire page & subdomain (added 29 Aug 2026)
+- `/hire` is live in the build: Andela-inspired structure, honesty-first
+  tone, `kind: "hire"` submissions through the same form pipeline (so the
+  form-delivery item above applies to it too).
+- `hire.iknite.space` is wired in code (`proxy.ts`) but needs the Railway
+  custom domain + DNS CNAME — steps in `docs/MEDIA_AND_MIGRATION.md`.
+- Wording sign-offs for the engagement models and the IkniteOS attribution
+  are listed in `docs/PENDING_APPROVAL.md` → "Hire & outsourcing".
+- No OG image yet for `/hire`; falls back to the site default like every
+  other page.
+
 ## Orientation for a new session
 
 | Path | What it is |

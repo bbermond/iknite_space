@@ -186,7 +186,7 @@ export default function ProjectsPage() {
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-7">
-                <CtaButton href="/partner#hire" variant="primary">
+                <CtaButton href="/hire" variant="primary">
                   Meet talent
                 </CtaButton>
               </div>

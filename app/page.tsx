@@ -166,8 +166,8 @@ function HireCopy({ t }: { t: TrackContent }) {
       </Reveal>
       <Reveal delay={200}>
         <div className="mt-7 flex flex-wrap gap-3">
-          <CtaButton href="/partner#hire" variant="ember">
-            Hire or meet talent
+          <CtaButton href="/hire" variant="ember">
+            Hire or work with us
           </CtaButton>
           <CtaButton href="/projects" variant="ghost">
             See their work
@@ -413,9 +413,9 @@ export default function HomePage() {
             },
             {
               t: "Employer",
-              d: "Review real work samples and meet team-ready juniors.",
-              href: "/partner#hire",
-              label: "Meet talent",
+              d: "Recruit a graduate, embed talent, or outsource a build.",
+              href: "/hire",
+              label: "Work with us",
             },
             {
               t: "Sponsor",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, site, statusLine, primaryCta } from "@/content/site";
+import { footerNav, site, statusLine, primaryCta } from "@/content/site";
 import { Wordmark } from "@/components/wordmark";
 import { BrandBlocks } from "@/components/brand-blocks";
 
@@ -33,7 +33,7 @@ export function Footer() {
           <nav className="md:col-span-3" aria-label="Footer">
             <p className="micro text-paper/60 mb-3">Site</p>
             <ul className="space-y-2">
-              {nav.map((item) => (
+              {footerNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

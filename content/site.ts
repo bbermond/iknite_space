@@ -48,11 +48,21 @@ export const site = {
   },
 };
 
+/**
+ * Navbar links. About and Insights live in the footer only — the navbar
+ * makes room for Hire, the business-facing entry point.
+ */
 export const nav = [
   { href: "/accelerator", label: "Accelerator" },
   { href: "/projects", label: "Projects" },
   { href: "/mentors", label: "Mentors" },
   { href: "/partner", label: "Partner" },
+  { href: "/hire", label: "Hire" },
+] as const;
+
+/** Footer site map — the navbar list plus the pages moved out of it. */
+export const footerNav = [
+  ...nav,
   { href: "/about", label: "About" },
   { href: "/insights", label: "Insights" },
 ] as const;

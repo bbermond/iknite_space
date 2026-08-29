@@ -42,6 +42,28 @@ What still needs confirming is craft-specific wording in
 The design track deliberately publishes **no** design-specific outcomes,
 counts, or alumni. It must not until they are documented.
 
+## Hire & outsourcing — added August 2026 ⚠ needs review
+
+`/hire` is the new business-facing page (navbar "Hire"; also served at the
+root of `hire.iknite.space` once that domain exists — see
+`docs/MEDIA_AND_MIGRATION.md`). It is deliberately honest — no invented
+stats, client logos, or testimonials — but several items are **offers**,
+not facts, and Iknite must be willing to honour them:
+
+| Claim on the page | Status |
+|---|---|
+| Three engagement models: recruit a graduate / embed talent / outsource a build | Confirm these are offers Iknite wants to make now |
+| Embed model: "Continued Iknite mentor oversight", "Monthly engagement, clear notice terms" | Confirm the oversight + commercial terms exist |
+| Outsource model: "senior engineers review it and answer for it", "Weekly demos and written status", "Fixed scope, milestone delivery" | Confirm delivery capacity before accepting a build |
+| "A real person replies … usually within a few working days" | Confirm someone owns hire@ inquiries (they land in the same submissions pipeline, `kind: "hire"`) |
+| IkniteOS: "built by Iknite Studio — the product arm of the Iknite ecosystem" | Confirm the attribution wording; tagline + six pillar names are quoted from ikniteos.com |
+| No rates or pricing published | Deliberate — pricing goes through conversation |
+| The page says **engineers** only | Deliberate — no design-talent hiring claims until the design track is approved (see above) |
+
+The straight-talk section explicitly disclaims "top 1%" -style marketing.
+If that tone feels too self-deprecating, soften `content/hire.ts` →
+`straightTalk`, not the honesty itself.
+
 ## Partner logos — added August 2026
 
 Reversing the earlier "no partner logos" position at the owner's direction.

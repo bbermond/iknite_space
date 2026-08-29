@@ -107,3 +107,23 @@ mark arrives, replace that file directly — the filename is what
    Domains; update DNS (CNAME) at the registrar.
 3. Confirm the old GitHub Pages site is retired after DNS propagates so
    redirects and SEO consolidate on the new site.
+
+## hire.iknite.space subdomain
+
+The hire page is host-aware. `proxy.ts` (this Next.js version's rename of
+`middleware`) rewrites `/` → `/hire` for any request whose Host starts
+with `hire.`, and 308-redirects `/hire` → `/` on that host, so the page
+has exactly one address per host. No separate deployment exists — it is
+the same Railway service.
+
+To go live:
+
+1. Railway → production service → Settings → Domains → add
+   `hire.iknite.space`.
+2. At the registrar, add a CNAME for `hire` pointing at the Railway
+   target shown in that dialog.
+3. Verify: `curl -H "Host: hire.iknite.space" https://<prod-url>/` should
+   return the hire page; the canonical URL in its metadata stays
+   `https://iknite.space/hire` until you decide the subdomain is the
+   primary address (then update `app/hire/page.tsx` metadata and the
+   sitemap entry together).

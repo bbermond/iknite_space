@@ -91,6 +91,17 @@ export function PartnerIntents() {
                   <p className="mt-4 text-[14px] text-ink-soft max-w-[52ch]">
                     {intent.body}
                   </p>
+                  {intent.id === "hire" && (
+                    <p className="mt-4">
+                      <a
+                        href="/hire"
+                        className="micro text-ember no-underline inline-flex items-center gap-1"
+                      >
+                        Full hiring &amp; outsourcing details
+                        <span aria-hidden="true">→</span>
+                      </a>
+                    </p>
+                  )}
                   {intent.id === "sponsor" && (
                     <p className="mt-4">
                       <a
