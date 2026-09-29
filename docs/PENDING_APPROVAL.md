@@ -17,6 +17,70 @@ safe placeholder framing until confirmed by Bermond.
 | Piscine | **2-week sink-or-swim challenge — added at owner's direction (July 2026)**, framed as "a test of passion, not skill" | Confirm exact piscine dates/format for Cohort 06 |
 | Eligibility | Engineering graduates / final-year internship students (+ self-taught encouraged) — from the current site's published criteria | Confirm wording, esp. whether self-taught applicants are formally eligible |
 
+## Design track — added August 2026 ⚠ needs review
+
+The site now reads through two lenses, switched from the header: **code**
+(`</>`) and **design** (`○◺`). Per the owner's direction the design track is
+presented as **open for the same Cohort 06**, sharing one application.
+
+Everything numeric on the design track is a confirmed programme fact that
+already applied to the engineering track — cohort, dates, seats, piscine,
+4 + 2 structure, mentor cadence, six-month internship. Nothing was invented.
+What still needs confirming is craft-specific wording in
+`content/tracks.ts` → `tracks.design`:
+
+| Item | Currently on site | Needs |
+|---|---|---|
+| Design track is open for Cohort 06 | Same status line, deadline, and Apply CTA as the engineering track | Confirm designers are being selected for **this** cohort |
+| Design curriculum | Five groups — Foundations, Craft, Research, Delivery, Professional — drawn from standard product-design practice | Confirm against what will actually be taught |
+| Design eligibility | Design/media graduates, final-year design students, self-taught with a body of work | Confirm, esp. which faculties count |
+| Design tooling | "A personal laptop and a Figma account" | Confirm Figma is the tool of record |
+| Application field | Design applicants give a **portfolio link** instead of a GitHub profile; essay asks "why do you want to become a product designer?" | Confirm wording |
+| Design mentors | `/mentors` now says "working engineers and designers" | **No design mentors are listed yet.** Either add them to `content/mentors.ts` or soften the claim |
+| Stat tile | Design track shows "6 mo — internship after the programme" where the engineering track shows "20+ courses completed early-phase (C04)" | A verified design-track equivalent, if one exists |
+
+The design track deliberately publishes **no** design-specific outcomes,
+counts, or alumni. It must not until they are documented.
+
+## Hire & outsourcing — added August 2026 ⚠ needs review
+
+`/hire` is the new business-facing page (navbar "Hire"; also served at the
+root of `hire.iknite.space` once that domain exists — see
+`docs/MEDIA_AND_MIGRATION.md`). It is deliberately honest — no invented
+stats, client logos, or testimonials — but several items are **offers**,
+not facts, and Iknite must be willing to honour them:
+
+| Claim on the page | Status |
+|---|---|
+| Three engagement models: recruit a graduate / embed talent / outsource a build | Confirm these are offers Iknite wants to make now |
+| Embed model: "Continued Iknite mentor oversight", "Monthly engagement, clear notice terms" | Confirm the oversight + commercial terms exist |
+| Outsource model: "senior engineers review it and answer for it", "Weekly demos and written status", "Fixed scope, milestone delivery" | Confirm delivery capacity before accepting a build |
+| "A real person replies … usually within a few working days" | Confirm someone owns hire@ inquiries (they land in the same submissions pipeline, `kind: "hire"`) |
+| IkniteOS: "built by Iknite Studio — the product arm of the Iknite ecosystem" | Confirm the attribution wording; tagline + six pillar names are quoted from ikniteos.com |
+| No rates or pricing published | Deliberate — pricing goes through conversation |
+| The page says **engineers** only | Deliberate — no design-talent hiring claims until the design track is approved (see above) |
+
+The straight-talk section explicitly disclaims "top 1%" -style marketing.
+If that tone feels too self-deprecating, soften `content/hire.ts` →
+`straightTalk`, not the honesty itself.
+
+## Partner logos — added August 2026
+
+Reversing the earlier "no partner logos" position at the owner's direction.
+Four partners are listed in `content/partners.ts`: **Iknite Studio**,
+**Mountain Hub**, **Moulingo**, **CimFest**.
+
+- Confirm each is a **current, documented** relationship — `/partner` states
+  in writing that a logo there means exactly that.
+- Logo files were not reachable from the build environment; all four render
+  as typographic placeholders until dropped into
+  `public/media/partners/` (see `docs/MEDIA_AND_MIGRATION.md`).
+- No descriptor, tagline, or URL is published for any partner. Add `href`
+  per partner once verified.
+- Mountain Hub specifically: the brief required separating Iknite from
+  Mountain Hub's branding. Listing it as a partner is compatible with that,
+  but confirm the framing is what you want.
+
 ## People
 
 - **Mentor roster — now published at the owner's direction (July 2026)**
@@ -66,5 +130,6 @@ safe placeholder framing until confirmed by Bermond.
 - Mountain Hub contact-form embed and all affiliation implications.
 - Google Form application embed (replaced by native form).
 - "Learn for free until you get a job" and "guaranteed job" claims.
-- Mentor logos/employer logos (Microsoft, etc.) — partner logos only return
-  with documented, current, approved relationships.
+- Mentor logos/employer logos (Microsoft, etc.) — these stay removed.
+  Partner logos returned in August 2026 at the owner's direction, under the
+  documented-relationship rule above.

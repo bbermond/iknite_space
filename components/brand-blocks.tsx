@@ -7,11 +7,27 @@
 export function BrandBlocks({
   tone = "light",
 }: {
-  /** light = on paper/gradient surfaces; dark = on the brand-purple surface */
-  tone?: "light" | "dark";
+  /**
+   * light    on paper / pale gradient surfaces
+   * dark     on the brand-violet surface
+   * gradient on the orange→red banner, where the shapes read as shadow
+   */
+  tone?: "light" | "dark" | "gradient";
 }) {
-  const block = tone === "dark" ? "bg-paper/[0.04]" : "bg-brand-red/[0.05]";
-  const arc = tone === "dark" ? "border-paper/[0.06]" : "border-brand-red/[0.08]";
+  // On the gradient band the shapes LIGHTEN rather than shade: darkening
+  // the red end pushed the dark-violet type below 4.5:1.
+  const block = {
+    light: "bg-brand-red/[0.05]",
+    dark: "bg-paper/[0.04]",
+    gradient: "bg-[var(--color-banner-paper)]/[0.10]",
+  }[tone];
+
+  const arc = {
+    light: "border-brand-red/[0.08]",
+    dark: "border-paper/[0.06]",
+    gradient: "border-[var(--color-banner-paper)]/[0.12]",
+  }[tone];
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <div className={`absolute -left-10 bottom-[-20%] w-64 h-[130%] ${block}`} />

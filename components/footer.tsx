@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { nav, site, statusLine, primaryCta } from "@/content/site";
+import { footerNav, site, statusLine, primaryCta } from "@/content/site";
 import { Wordmark } from "@/components/wordmark";
 import { BrandBlocks } from "@/components/brand-blocks";
 
@@ -8,7 +8,9 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden wash-brand text-paper mt-24">
+    // `on-brand` pins paper/ink to fixed light values: this surface is
+    // deep violet in BOTH tracks, so it must not follow the inversion.
+    <footer className="on-brand relative overflow-hidden wash-brand text-paper mt-24">
       <BrandBlocks tone="dark" />
       <div className="relative mx-auto max-w-6xl px-5 sm:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
@@ -31,7 +33,7 @@ export function Footer() {
           <nav className="md:col-span-3" aria-label="Footer">
             <p className="micro text-paper/60 mb-3">Site</p>
             <ul className="space-y-2">
-              {nav.map((item) => (
+              {footerNav.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

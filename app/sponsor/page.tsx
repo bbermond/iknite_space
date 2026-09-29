@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { CtaButton } from "@/components/cta";
 import { BigCta } from "@/components/big-cta";
 import { Section, PlusCorners } from "@/components/section";
+import { StatementBanner } from "@/components/banner";
 import { ChecklistCard } from "@/components/graphics";
 import { submitForm } from "@/lib/actions";
 import { cohort, site } from "@/content/site";
@@ -59,7 +60,7 @@ export default function SponsorPage() {
           <Reveal delay={160}>
             <p className="mt-6 max-w-[54ch] text-[15px] text-ink-soft">
               Ten seats, six months, real delivery — a documented program that
-              turns emerging engineers into people teams can rely on.
+              turns emerging talent into people teams can rely on.
               Sponsorship keeps it running, and keeps it selective on merit.
             </p>
           </Reveal>
@@ -90,8 +91,8 @@ export default function SponsorPage() {
               <p>
                 This is not a certificate mill. Around ten trainees per cohort
                 work through structured coursework, a two-week piscine, team
-                sprints, code review, and public demos — with bi-weekly 1:1
-                mentorship from working engineers.
+                sprints, critique, code review, and public demos — with bi-weekly
+                1:1 mentorship from working practitioners.
               </p>
               <p className="text-ink">
                 Every cohort is documented publicly. You can see exactly what
@@ -101,6 +102,21 @@ export default function SponsorPage() {
           </Reveal>
         </div>
       </Section>
+
+      {/* ── Band: what one cohort actually is ────────────────── */}
+      <StatementBanner
+        tone="violet"
+        eyebrow="One cohort, end to end"
+        headline="Ten seats, six months, and a public record of every sprint."
+        body="Support covers what it costs to run a cohort — mentorship, workspace, and delivery — for engineers and designers training side by side. What the cohort produced is published as it happens, not summarised afterwards."
+        cta={{ href: "#sponsor-form", label: "Start the conversation" }}
+        facts={[
+          { k: "Piscine", v: "2 weeks" },
+          { k: "Structure", v: "4 + 2 months" },
+          { k: "Mentorship", v: "1:1 every 2 weeks" },
+          { k: "After", v: "6-month internship" },
+        ]}
+      />
 
       {/* ── What support funds ───────────────────────────────── */}
       <Section label="What support funds" index="02">
@@ -258,10 +274,10 @@ export default function SponsorPage() {
       </Section>
 
       {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="border-t hairline">
-        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 relative overflow-hidden">
-          <div className="absolute inset-0 dot-grid" aria-hidden="true" />
-          <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+      <section className="relative overflow-hidden border-t hairline">
+        <div className="absolute inset-0 dot-grid" aria-hidden="true" />
+        <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 relative">
           <div className="relative text-center">
             <Reveal>
               <p className="micro text-ink-soft">

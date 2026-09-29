@@ -32,7 +32,7 @@ export const site = {
   name: "Iknite Space",
   tagline: "Tech Talent Accelerator — Buea, Cameroon",
   description:
-    "A selective six-month accelerator in Buea where emerging engineers learn through real projects, mentorship, and real team workflows. Applications open for Cohort 06, starting September 2026.",
+    "A selective six-month accelerator in Buea where emerging engineers and designers learn through real projects, mentorship, and real team workflows. Applications open for Cohort 06, starting September 2026.",
   url: "https://iknite.space",
   /**
    * Contact details below are the currently published public ones.
@@ -48,11 +48,21 @@ export const site = {
   },
 };
 
+/**
+ * Navbar links. About and Insights live in the footer only — the navbar
+ * makes room for Hire, the business-facing entry point.
+ */
 export const nav = [
   { href: "/accelerator", label: "Accelerator" },
   { href: "/projects", label: "Projects" },
   { href: "/mentors", label: "Mentors" },
   { href: "/partner", label: "Partner" },
+  { href: "/hire", label: "Hire" },
+] as const;
+
+/** Footer site map — the navbar list plus the pages moved out of it. */
+export const footerNav = [
+  ...nav,
   { href: "/about", label: "About" },
   { href: "/insights", label: "Insights" },
 ] as const;

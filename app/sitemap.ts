@@ -7,6 +7,7 @@ import { getInsights } from "@/lib/insights";
 const staticRoutes: { path: string; priority: number }[] = [
   { path: "", priority: 1 },
   { path: "/accelerator", priority: 0.9 },
+  { path: "/hire", priority: 0.9 },
   { path: "/apply", priority: 0.9 },
   { path: "/projects", priority: 0.8 },
   { path: "/mentors", priority: 0.8 },

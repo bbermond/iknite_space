@@ -27,6 +27,13 @@
   --color-brand-mid: #f96a5b;
   --color-brand-red: #ff2c5b;
 
+  /* ---- Fixed banner tokens ----
+     Colourful bands read identically in both tracks, so they must NOT use
+     the paper/ink tokens (those inverse themselves in the design track).
+     banner-ink sits ≥4.7:1 on every stop of the brand gradient.          */
+  --color-banner-ink: #22084a;
+  --color-banner-paper: #fdfbff;
+
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 
@@ -47,6 +54,49 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   TRACKS — two lenses on the same site, switched from the header.
+
+   code   : the blueprint. Off-white paper, ink hairlines, wireframe.
+   design : the same structure rendered in full — dark surface, brand
+            violet, gradient washes, saturated accents.
+
+   Everything below re-points the SAME tokens, so the entire design
+   system (hairlines, dot fields, hatching, gutters, patterns, buttons)
+   inverts from these declarations alone. `data-track` is written onto
+   <html> by an inline script in the layout before first paint.
+   ══════════════════════════════════════════════════════════════════ */
+[data-track="code"] {
+  color-scheme: light;
+}
+[data-track="design"] {
+  color-scheme: dark;
+  --color-paper: #0f0a1e;
+  --color-paper-2: #181030;
+  --color-ink: #f5f1ff;
+  --color-ink-soft: #b0a4cd;
+
+  /* On a dark field the roles flip: `ember-ink` (small text, button
+     fills) must be the LIGHT shade, `ember-deep` lighter still for
+     hover. #ffa06b holds ≈9.8:1 on the design surface.               */
+  --color-ember: #ff6a2b;
+  --color-ember-ink: #ffa06b;
+  --color-ember-deep: #ffc39a;
+  --color-ember-soft: #ffcda3;
+  --color-flare: #ff9a6b;
+}
+
+/* Content authored for the other track is removed from the box tree —
+   `display: none` also takes it out of the accessibility tree, so
+   screen readers and search snippets only ever see the active lens. */
+[data-when] {
+  display: contents;
+}
+[data-track="code"] [data-when="design"],
+[data-track="design"] [data-when="code"] {
+  display: none !important;
+}
+
 body {
   background: var(--color-paper);
   color: var(--color-ink);
@@ -55,6 +105,17 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* The design track's ambient field: brand violet bleeding up from the
+   base, so long pages never flatten into a single dead black. */
+[data-track="design"] body {
+  background:
+    radial-gradient(120% 60% at 78% -5%, color-mix(in srgb, var(--color-brand) 85%, transparent), transparent 60%),
+    radial-gradient(90% 50% at 5% 8%, color-mix(in srgb, var(--color-brand-red) 12%, transparent), transparent 55%),
+    var(--color-paper);
+  background-attachment: fixed;
 }
 
 ::selection {
@@ -109,6 +170,126 @@ body {
     var(--color-brand);
 }
 
+/* ---- Design-track washes: the same shapes, fully saturated ----
+   On paper these are pale tints; on the dark surface they become the
+   colour of the page, so they carry far more of the gradient. */
+[data-track="design"] .wash-ember {
+  background:
+    radial-gradient(85% 70% at 88% -10%, color-mix(in srgb, var(--color-brand-red) 42%, transparent), transparent 62%),
+    radial-gradient(70% 60% at 2% 105%, color-mix(in srgb, var(--color-brand-orange) 26%, transparent), transparent 60%);
+}
+[data-track="design"] .wash-ember-strong {
+  background:
+    radial-gradient(100% 90% at 82% 0%, color-mix(in srgb, var(--color-brand-red) 50%, transparent), transparent 66%),
+    radial-gradient(85% 75% at 6% 100%, color-mix(in srgb, var(--color-brand-orange) 34%, transparent), transparent 64%),
+    linear-gradient(160deg, color-mix(in srgb, var(--color-brand) 60%, transparent), transparent 70%),
+    var(--color-paper-2);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   COLOURFUL BANNERS — the brand's gradient bands.
+
+   These are the one surface that must look the SAME in both tracks, so
+   they resolve against the fixed --color-banner-* tokens instead of
+   paper/ink. `banner-ink` (#22084a) clears 4.7:1 against every stop of
+   the orange→red gradient and 8.4:1 against the lightest.
+   ══════════════════════════════════════════════════════════════════ */
+.banner {
+  position: relative;
+  overflow: hidden;
+  --color-paper: var(--color-banner-paper);
+  --color-ink: var(--color-banner-ink);
+  --color-ink-soft: color-mix(in srgb, var(--color-banner-ink) 78%, transparent);
+}
+/* The red end is the darkest point of the brand gradient, and small
+   dark-violet type lands at only ~4.0:1 against raw #ff2c5b. Lifting
+   that one stop 12% toward banner-paper is visually indistinguishable
+   and takes the whole band past 4.5:1. Measured, not assumed — see the
+   pixel-sampling check in the launch notes. */
+.banner-gradient {
+  background: linear-gradient(
+    104deg,
+    var(--color-brand-orange) 0%,
+    var(--color-brand-mid) 46%,
+    color-mix(in srgb, var(--color-brand-red) 88%, var(--color-banner-paper)) 100%
+  );
+  color: var(--color-banner-ink);
+}
+/* Violet → red: the inverse band, light type on deep brand colour. */
+.banner-violet {
+  background: linear-gradient(
+    118deg,
+    var(--color-brand-deep) 0%,
+    var(--color-brand) 48%,
+    color-mix(in srgb, var(--color-brand-red) 72%, var(--color-brand)) 100%
+  );
+  color: var(--color-banner-paper);
+  --color-ink: var(--color-banner-paper);
+  --color-ink-soft: color-mix(in srgb, var(--color-banner-paper) 74%, transparent);
+  --color-paper: var(--color-brand-deep);
+}
+/* Full spectrum sweep — violet through the mark's gradient. Used once,
+   as the widest band on the page.
+
+   Light type cannot sit on the orange half at any usable ratio (white on
+   #f99f61 is 2:1), and on a narrow viewport the whole sweep compresses
+   under the text column — so the band carries a flat brand-violet scrim
+   over the sweep. At 46% every stop drops below 0.15 relative luminance,
+   which holds white type above 5:1 across the full width while the hues
+   still read as the mark's gradient. */
+.banner-spectrum {
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--color-brand-deep) 46%, transparent),
+      color-mix(in srgb, var(--color-brand-deep) 46%, transparent)
+    ),
+    linear-gradient(
+      100deg,
+      var(--color-brand-deep) 0%,
+      var(--color-brand) 26%,
+      var(--color-brand-red) 62%,
+      var(--color-brand-mid) 82%,
+      var(--color-brand-orange) 100%
+    );
+  color: var(--color-banner-paper);
+  --color-ink: var(--color-banner-paper);
+  --color-ink-soft: color-mix(in srgb, var(--color-banner-paper) 74%, transparent);
+  --color-paper: var(--color-brand-deep);
+}
+
+/* ---- Partner logos ----
+   Marks settle back to full colour on hover; the placeholder wordmark
+   is token-based and needs no treatment. */
+.partner-mark {
+  filter: grayscale(1);
+  opacity: 0.72;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.partner-mark:hover,
+a:focus-visible .partner-mark {
+  filter: grayscale(0);
+  opacity: 1;
+}
+/* A single-colour black mark, flipped to white for the dark surface. */
+[data-track="design"] .partner-invert {
+  filter: invert(1);
+}
+/* The always-safe option: full-colour marks keep their own light ground
+   so nothing disappears into the dark surface. */
+[data-track="design"] .partner-plate {
+  background: var(--color-banner-paper);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Surfaces that are permanently dark in BOTH tracks (footer, brand
+   panels). Pinning the tokens keeps `text-paper/70` light even when the
+   design track has inverted paper to near-black. */
+.on-brand {
+  --color-paper: var(--color-banner-paper);
+  --color-ink: #14082b;
+  --color-ember-ink: var(--color-ember-soft);
+}
+
 /* ---- Text utilities ---- */
 .micro {
   font-size: 11px;
@@ -145,6 +326,44 @@ body {
   background: var(--color-ember-ink);
   border-color: var(--color-ember-ink);
   color: var(--color-paper);
+}
+
+/* ---- Track switcher: `</>` :: `○◺` ----
+   Active state is driven by [data-track] on <html>, never by React
+   state, so the correct half is lit by the inline script before first
+   paint — no flash, and no hydration mismatch on a static page. */
+.track-switch {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 32%, transparent);
+  line-height: 0;
+}
+.track-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  padding: 0.4rem 0;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.track-btn + .track-btn {
+  border-left: 1px solid color-mix(in srgb, var(--color-ink) 32%, transparent);
+}
+.track-btn:hover {
+  color: var(--color-ink);
+}
+[data-track="code"] .track-btn[data-mode="code"],
+[data-track="design"] .track-btn[data-mode="design"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+/* In the design track the lit half carries the mark's own gradient —
+   the switch itself shows what it switches to. */
+[data-track="design"] .track-btn[data-mode="design"] {
+  background: linear-gradient(104deg, var(--color-brand-orange), var(--color-brand-red));
+  color: var(--color-banner-ink);
 }
 
 a:focus-visible,

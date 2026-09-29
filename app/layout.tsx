@@ -6,6 +6,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { Loader } from "@/components/loader";
 import { site } from "@/content/site";
+import { DEFAULT_TRACK, TRACK_INIT_SCRIPT } from "@/lib/track";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -38,8 +39,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-track={DEFAULT_TRACK}
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Applies the saved lens before the first paint, so a returning
+            visitor on the design track never sees the paper-white page
+            flash to dark. See lib/track.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: TRACK_INIT_SCRIPT }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <Loader />
         <a

@@ -1,90 +1,15 @@
 /**
- * Accelerator program content — grounded in the July 2026 build brief.
- * Verified operating facts only; unconfirmed items live in docs/PENDING_APPROVAL.md.
+ * Accelerator programme content — grounded in the July 2026 build brief.
+ * Verified operating facts only; unconfirmed items live in
+ * docs/PENDING_APPROVAL.md.
+ *
+ * Everything in this file is TRUE OF BOTH TRACKS. Craft-specific copy —
+ * curriculum, ticker, stats, learning model, eligibility — lives in
+ * content/tracks.ts, keyed by lens. The two files together describe one
+ * programme, not two.
  */
 
-export const stats = [
-  { value: 6, suffix: " mo", label: "Structured accelerator phase" },
-  { value: 10, suffix: "", label: "Seats per cohort, selected" },
-  { value: 2, suffix: " wk", label: "Mentor check-in cadence" },
-  { value: 20, suffix: "+", label: "Courses completed early-phase (C04)" },
-] as const;
-
-export const learningModel = [
-  {
-    step: "01",
-    title: "Discover & select",
-    body: "We look for curiosity, discipline, foundational ability, and the willingness to learn by doing. Small cohorts, deliberate selection.",
-  },
-  {
-    step: "02",
-    title: "Prepare",
-    body: "Selected applicants complete assigned foundational learning and set up the tools and habits the cohort runs on.",
-  },
-  {
-    step: "03",
-    title: "Build foundations",
-    body: "Core engineering, product, and collaboration concepts — from version control to system structure.",
-  },
-  {
-    step: "04",
-    title: "Work in teams",
-    body: "Plan solutions, write user stories, define domains and APIs, work in sprints, review code, respond to feedback.",
-  },
-  {
-    step: "05",
-    title: "Ship projects",
-    body: "Build usable solutions to locally relevant problems. Show the work, the process, and the learning.",
-  },
-  {
-    step: "06",
-    title: "Transition",
-    body: "Move toward internships, Iknite work, external employment, further specialization, or a founder path where available.",
-  },
-] as const;
-
-export const curriculum = [
-  {
-    label: "Foundations",
-    items: ["Ubuntu & dev environment", "Git & GitHub", "HTML & CSS", "JavaScript", "NPM"],
-  },
-  {
-    label: "Engineering",
-    items: ["Go", "React", "Next.js", "Relational databases", "API design", "Auth & authorization"],
-  },
-  {
-    label: "Systems",
-    items: ["Design patterns", "Domain-Driven Design", "Domain boundaries", "API contracts", "Maintainability trade-offs"],
-  },
-  {
-    label: "Delivery",
-    items: ["Agile & Scrum", "User stories & sprints", "Linting & testing", "CI/CD with GitHub Actions", "Pull requests & review", "Refactoring"],
-  },
-  {
-    label: "Professional",
-    items: ["Product ideation", "UX exposure", "Communication", "Teamwork", "Book Club", "Public demos"],
-  },
-] as const;
-
-/** Ticker terms for the marquee. */
-export const ticker = [
-  "GIT",
-  "GO",
-  "REACT",
-  "NEXT.JS",
-  "POSTGRES",
-  "API CONTRACTS",
-  "DDD",
-  "SCRUM",
-  "CI/CD",
-  "CODE REVIEW",
-  "USER STORIES",
-  "SPRINTS",
-  "TESTING",
-  "AUTH",
-  "REFACTORING",
-  "DEMOS",
-] as const;
+import type { TrackContent } from "@/content/tracks";
 
 export const commitment = [
   { k: "Piscine", v: "2 weeks, sink or swim — before the program" },
@@ -93,7 +18,6 @@ export const commitment = [
   { k: "Cohort size", v: "~10 trainees, selective" },
   { k: "Mentorship", v: "1:1 sessions every two weeks" },
   { k: "Structure", v: "4 months mentored training + 2 months team project" },
-  { k: "Equipment", v: "Personal laptop + GitHub account" },
   { k: "After the program", v: "6-month internship & industry transition" },
 ] as const;
 
@@ -108,6 +32,7 @@ export const selectionProcess = [
 /**
  * The cohort pipeline — powers the interactive diagram on the home hero.
  * Stats are verified program facts; blurbs are the hover-card copy.
+ * Identical for both tracks: one cohort moves through one pipeline.
  */
 export const pipelineStages = [
   {
@@ -152,7 +77,7 @@ export const pipelineStages = [
     statSuffix: " mo",
     statLabel: "4 training + 2 project",
     blurb:
-      "Four months of mentored, structured training — then two months focused on your team project. Sprints, code review, and demos throughout.",
+      "Four months of mentored, structured training — then two months focused on your team project. Sprints, critique, code review, and demos throughout.",
   },
   {
     id: "internship",
@@ -169,29 +94,36 @@ export const pipelineStages = [
 
 export type PipelineStage = (typeof pipelineStages)[number];
 
-export const faqs = [
-  {
-    q: "Who is eligible?",
-    a: "Graduates of engineering programs in higher institutions or universities, and final-year students on internship from engineering faculties. Credible self-taught learners and career switchers with equivalent foundations are encouraged to apply — tell us your story in the application essay.",
-  },
-  {
-    q: "How long is the program?",
-    a: "A two-week piscine, then six months structured as four months of mentored training followed by two months focused on your team project — then a six-month internship into real work.",
-  },
-  {
-    q: "How are trainees selected?",
-    a: "Application review (including a short essay on why you want to be a software engineer), assigned preparatory learning, and an in-person interview — then a two-week piscine, a sink-or-swim challenge that tests passion, not existing skill. Cohorts are small — around 10 seats — so selection is competitive.",
-  },
-  {
-    q: "What do I need?",
-    a: "A personal laptop, a GitHub account, and the ability to live in Buea and attend in person daily for the duration of the program.",
-  },
-  {
-    q: "What does it cost?",
-    a: "Cost and funding details for the September 2026 cohort are published with the application. Ask us directly via the contact page if anything is unclear.",
-  },
-  {
-    q: "Is it remote?",
-    a: "No. The program is built around in-person collaboration in Buea — teamwork, reviews, and demos happen face to face.",
-  },
-] as const;
+/**
+ * FAQs. Four answers are identical for both crafts; two — who is
+ * eligible, and what you need — are built from the track's own wording
+ * so neither lens ever claims the other's entry requirements.
+ */
+export function getFaqs(track: TrackContent) {
+  return [
+    {
+      q: "Who is eligible?",
+      a: `${track.eligibility[0].body} ${track.eligibility[1].body} ${track.eligibility[2].body} Tell us your story in the application essay.`,
+    },
+    {
+      q: "How long is the program?",
+      a: "A two-week piscine, then six months structured as four months of mentored training followed by two months focused on your team project — then a six-month internship into real work.",
+    },
+    {
+      q: "How are trainees selected?",
+      a: "Application review (including a short essay on why you want to do this work), assigned preparatory learning, and an in-person interview — then a two-week piscine, a sink-or-swim challenge that tests passion, not existing skill. Cohorts are small — around 10 seats — so selection is competitive.",
+    },
+    {
+      q: "What do I need?",
+      a: `${track.equipment} And the ability to live in Buea and attend in person daily for the duration of the program.`,
+    },
+    {
+      q: "What does it cost?",
+      a: "Cost and funding details for the September 2026 cohort are published with the application. Ask us directly via the contact page if anything is unclear.",
+    },
+    {
+      q: "Is it remote?",
+      a: "No. The program is built around in-person collaboration in Buea — teamwork, reviews, and demos happen face to face.",
+    },
+  ] as const;
+}

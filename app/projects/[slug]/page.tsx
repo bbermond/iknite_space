@@ -185,7 +185,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </Reveal>
             <Reveal delay={160}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <CtaButton href="/partner#hire" variant="primary">
+                <CtaButton href="/hire" variant="primary">
                   Meet talent
                 </CtaButton>
                 <CtaButton href="/apply" variant="ember">

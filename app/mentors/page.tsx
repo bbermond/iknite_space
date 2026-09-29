@@ -11,7 +11,7 @@ import { cohort } from "@/content/site";
 export const metadata: Metadata = {
   title: "Mentors",
   description:
-    "Working engineers and practitioners guide every Iknite Space cohort in structured 1:1 sessions every two weeks — reviewing work, questioning decisions, and sharing real-world context.",
+    "Working engineers and designers guide every Iknite Space cohort in structured 1:1 sessions every two weeks — reviewing work, questioning decisions, and sharing real-world context.",
 };
 
 export default function MentorsPage() {
@@ -30,7 +30,7 @@ export default function MentorsPage() {
           </Reveal>
 
           <h1 className="mt-8 text-4xl sm:text-6xl font-medium leading-[1.05] tracking-tight">
-            <Decode text="Working engineers," />
+            <Decode text="Working practitioners," />
             <br />
             <Decode text="in your corner." />
           </h1>
@@ -160,10 +160,10 @@ export default function MentorsPage() {
       </Section>
 
       {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="border-t hairline">
-        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 relative overflow-hidden">
-          <div className="absolute inset-0 dot-grid" aria-hidden="true" />
-          <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+      <section className="relative overflow-hidden border-t hairline">
+        <div className="absolute inset-0 dot-grid" aria-hidden="true" />
+        <div className="absolute inset-0 wash-ember" aria-hidden="true" />
+        <div className="mx-auto max-w-6xl px-5 sm:px-10 py-20 relative">
           <div className="relative text-center">
             <Reveal>
               <p className="micro text-ink-soft">

@@ -112,9 +112,9 @@ export default function ProjectsPage() {
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-5 text-[14px] text-ink-soft max-w-[44ch]">
-                Trainee projects sit alongside Iknite&apos;s own engineering and
-                open-source work — classified honestly, so you always know what
-                you are looking at.
+                Trainee projects sit alongside Iknite&apos;s own engineering
+                and open-source work — classified honestly, so you always know
+                what you are looking at.
               </p>
             </Reveal>
             <Reveal delay={200}>
@@ -186,7 +186,7 @@ export default function ProjectsPage() {
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-7">
-                <CtaButton href="/partner#hire" variant="primary">
+                <CtaButton href="/hire" variant="primary">
                   Meet talent
                 </CtaButton>
               </div>

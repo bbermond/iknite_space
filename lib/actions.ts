@@ -16,7 +16,7 @@ import { redirect } from "next/navigation";
  * No third-party form embeds; Iknite controls the data end to end.
  */
 
-const KINDS = ["application", "partner", "contact"] as const;
+const KINDS = ["application", "partner", "contact", "hire"] as const;
 export type FormKind = (typeof KINDS)[number];
 
 /** Generous cap — the apply essay is the most important field on the site. */
