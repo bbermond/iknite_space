@@ -11,9 +11,9 @@ import {
 import { InlineScript } from "@/components/inline-script";
 
 /**
- * The two-glyph lens switch that sits beside the primary CTA.
+ * The two-glyph presentation switch that sits beside the primary CTA.
  *
- * `</>` for the engineering track, circle-and-triangle for design — the
+ * `</>` for the engineering view, circle-and-triangle for design — the
  * primitives each craft actually draws with. Both are stroked at the
  * same optical weight so neither half reads as the "on" state by
  * default; the lit half is set by CSS from `[data-track]`, which the
@@ -21,11 +21,11 @@ import { InlineScript } from "@/components/inline-script";
  */
 
 const DESCRIPTION: Record<Track, string> = {
-  code: "Code view — the engineering track",
-  design: "Design view — the design track",
+  code: "Engineering presentation",
+  design: "Design presentation",
 };
 
-const SHORT: Record<Track, string> = { code: "Code", design: "Design" };
+const SHORT: Record<Track, string> = { code: "Engineering view", design: "Design view" };
 
 function TrackGlyph({ track }: { track: Track }) {
   const common = {

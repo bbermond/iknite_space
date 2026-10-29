@@ -11,11 +11,12 @@ import { Banner } from "@/components/banner";
 import { cohort, primaryCta, statusLine } from "@/content/site";
 import { commitment, selectionProcess, getFaqs } from "@/content/program";
 import { tracks, type TrackContent } from "@/content/tracks";
+import { ProgramTracks } from "@/components/program-tracks";
 
 export const metadata: Metadata = {
   title: "Accelerator",
   description:
-    "A selective six-month accelerator in Buea: structured coursework, bi-weekly 1:1 mentorship, team projects, and sprint delivery — with internship and industry transition pathways after.",
+    "Explore Software Engineering, DevOps, Cybersecurity, Data Analytics, and Design training at Iknite Space in Buea.",
 };
 
 /** Only the second row differs between crafts — the tool the work lives in. */
@@ -259,6 +260,18 @@ export default function AcceleratorPage() {
           </Reveal>
         </div>
       </section>
+
+      <Section id="tracks" label="Five training tracks" pattern="dots">
+        <div className="max-w-[54ch] mb-8">
+          <Reveal>
+            <h2 className="text-2xl sm:text-4xl font-medium leading-tight">Choose your discipline.</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-4 text-[14px] text-ink-soft">The programme brings together five areas of technology and product work.</p>
+          </Reveal>
+        </div>
+        <ProgramTracks />
+      </Section>
 
       {/* ── Who it's for ─────────────────────────────────────── */}
       <Section label="Who it's for" pattern="dots" index="01">

@@ -7,15 +7,18 @@ founders, and technology ventures.
 Built with Next.js (App Router) + Tailwind CSS 4, monospace-first technical
 design system, deployed on Railway.
 
-The site reads through **two lenses**, switched from the header:
+The programme lists **five training tracks**: Software Engineering, DevOps,
+Cybersecurity, Data Analytics, and Design. The header also has a separate
+two-style presentation switch:
 
 | | | |
 |---|---|---|
 | `</>` | **code** | the blueprint — off-white paper, ink hairlines, engineering copy |
 | `○◺` | **design** | the same programme in full — dark surface, brand gradients, design copy |
 
-One programme underneath: same cohort, same dates, same application. Only
-the craft-specific copy changes. See **Tracks** below.
+The presentation switch changes the site's palette and the engineering or
+design copy. It does not choose an applicant's programme track. Applicants
+select one of the five listed tracks in the application form.
 
 ## Develop
 
@@ -31,8 +34,9 @@ npm run lint
 | Path | What |
 |---|---|
 | `content/site.ts` | **Cohort status, dates, CTAs, contact, nav** — the one file to edit between cohorts |
-| `content/tracks.ts` | **Everything the lens switch changes** — per-track copy, curriculum, eligibility, apply fields |
-| `content/program.ts` | Facts true of BOTH tracks: pipeline, selection, commitment, FAQ shell |
+| `content/program-tracks.ts` | The five programme tracks shown on the public site and application |
+| `content/tracks.ts` | **Everything the presentation switch changes** — engineering and design copy, curriculum, eligibility |
+| `content/program.ts` | Shared programme facts: pipeline, selection, commitment, FAQ shell |
 | `content/partners.ts` | Partner strip — names, links, dark-surface handling |
 | `content/projects.ts` | Trainee project case studies |
 | `content/insights/*.md` | Blog articles — **add a .md file to publish** (see `docs/ADDING_ARTICLES.md`) |
@@ -46,7 +50,7 @@ npm run lint
 | `docs/ADDING_ARTICLES.md` | How to publish a blog article |
 | `docs/DEPLOY_RAILWAY.md` | Deployment guide |
 
-## Tracks
+## Presentation switch
 
 The active lens is one attribute — `data-track` on `<html>` — written by an
 inline script in `app/layout.tsx` before the first paint, so a returning
@@ -63,16 +67,11 @@ Everything follows from that attribute:
   also takes it out of the accessibility tree. Pages stay Server Components
   and fully static — switching costs no refetch and no re-render.
 
-Two deliberate exceptions:
-
-- **Form fields** use the client component `components/apply-track-fields.tsx`
-  instead, because a `display: none` input is still submitted. Only the
-  active track's fields exist in the DOM at all.
-- **Banners** (`components/banner.tsx`) look identical in both lenses. They
+**Banners** (`components/banner.tsx`) look identical in both styles. They
   re-point paper/ink to the fixed `--color-banner-*` tokens, so anything
   nested inside resolves against the band rather than the page.
 
-To add track-specific copy: add the field to both tracks in
+To add presentation-specific copy: add the field to both views in
 `content/tracks.ts`, then render it through `<Track>`.
 
 ## Content rules

@@ -14,6 +14,7 @@ import { StatementBanner } from "@/components/banner";
 import { PartnerLogos } from "@/components/partner-logos";
 import { cohort, primaryCta, statusLine } from "@/content/site";
 import { tracks, type TrackContent } from "@/content/tracks";
+import { ProgramTracks } from "@/components/program-tracks";
 import { projects } from "@/content/projects";
 
 /* Sections that read differently through each lens are written once as a
@@ -261,6 +262,18 @@ export default function HomePage() {
         </div>
       </section>
 
+      <Section id="tracks" label="Five training tracks" pattern="dots">
+        <div className="max-w-[54ch] mb-8">
+          <Reveal>
+            <h2 className="text-2xl sm:text-4xl font-medium leading-tight">Choose the work you want to learn.</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-4 text-[14px] text-ink-soft">Explore the five Iknite Space training tracks.</p>
+          </Reveal>
+        </div>
+        <ProgramTracks />
+      </Section>
+
       {/* ── Two doors in ─────────────────────────────────────── */}
       <div className="border-t hairline">
         <Track code={<Doors t={tracks.code} />} design={<Doors t={tracks.design} />} />
@@ -288,21 +301,10 @@ export default function HomePage() {
       {/* ── Band: what the switch actually switches ──────────── */}
       <StatementBanner
         tone="gradient"
-        eyebrow="One programme, two crafts"
-        headline={
-          <>
-            Engineers and designers train in the same cohort — because
-            that&apos;s how they&apos;ll work.
-          </>
-        }
-        body="Same six months, same piscine, same mentors, same team projects. Designers sit with the engineers building their work, and engineers ship against real design. Switch the lens in the header to read the programme through either craft."
-        cta={{ href: "/accelerator", label: "How the program works" }}
-        facts={[
-          { k: "Cohort", v: cohort.name },
-          { k: "Starts", v: cohort.start },
-          { k: "Where", v: cohort.location },
-          { k: "Seats", v: cohort.seats },
-        ]}
+        eyebrow="Five training tracks"
+        headline="Software Engineering. DevOps. Cybersecurity. Data Analytics. Design."
+        body="Choose the discipline you want to develop. The application lets you select a track and tell us about your background and work."
+        cta={{ href: "/apply", label: "Choose a track" }}
       />
 
       {/* ── Proof ────────────────────────────────────────────── */}

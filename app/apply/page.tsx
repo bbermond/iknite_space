@@ -5,9 +5,8 @@ import { CtaButton } from "@/components/cta";
 import { Section } from "@/components/section";
 import { ApplyForm } from "@/components/apply-form";
 import { ChecklistCard } from "@/components/graphics";
-import { Track } from "@/components/track";
 import { cohort, statusLine } from "@/content/site";
-import { tracks, type TrackContent } from "@/content/tracks";
+import { ProgramTracks } from "@/components/program-tracks";
 
 const open = cohort.status === "open";
 
@@ -17,31 +16,6 @@ export const metadata: Metadata = {
     ? `Apply to ${cohort.name} — a selective six-month accelerator in ${cohort.location}. Application, essay, prep work, and an in-person interview. Every applicant gets a response.`
     : `Applications for ${cohort.name} are not open right now. Join the waitlist and we will contact you when the next application window opens.`,
 };
-
-/** Entry criteria are the one part of the digest that differs by craft. */
-function EligibilityList({ t }: { t: TrackContent }) {
-  return (
-    <ul className="mt-4 space-y-3 text-[13px] text-ink-soft">
-      {t.eligibility.map((item) => (
-        <li key={item.tag} className="flex gap-3">
-          <span className="text-ember" aria-hidden="true">
-            +
-          </span>
-          <span>{item.body}</span>
-        </li>
-      ))}
-      <li className="flex gap-3">
-        <span className="text-ember" aria-hidden="true">
-          +
-        </span>
-        <span>
-          Applying to the other track? Switch the lens in the header — the
-          criteria change with it.
-        </span>
-      </li>
-    </ul>
-  );
-}
 
 export default function ApplyPage() {
   return (
@@ -125,19 +99,20 @@ export default function ApplyPage() {
             <p className="text-[14px] text-ink-soft max-w-[52ch]">
               The seats go to people who can commit fully — in person, in
               Buea, every day, for six months. Read the digest below; the
-              accelerator page has the full curriculum, selection process,
-              and FAQ.
+              accelerator page has the programme structure and further
+              details.
             </p>
           </Reveal>
         </div>
 
         <div className="grid sm:grid-cols-2 border hairline divide-y sm:divide-y-0 sm:divide-x [&>div]:hairline">
           <Reveal className="p-6 sm:p-8">
-            <h3 className="micro text-ember">Eligibility</h3>
-            <Track
-              code={<EligibilityList t={tracks.code} />}
-              design={<EligibilityList t={tracks.design} />}
-            />
+            <h3 className="micro text-ember">Your track</h3>
+            <p className="mt-4 text-[13px] text-ink-soft">
+              Choose one of the five training tracks below. Share your
+              education, experience, and any relevant work so the team can
+              understand where you are starting from.
+            </p>
           </Reveal>
 
           <Reveal delay={100} className="p-6 sm:p-8">
@@ -145,7 +120,7 @@ export default function ApplyPage() {
             <ul className="mt-4 space-y-3 text-[13px] text-ink-soft">
               {[
                 "Six months, structured — in person in Buea, daily attendance.",
-                "A personal laptop and a GitHub account.",
+                "A personal laptop.",
                 "Coursework, team projects, and sprint delivery.",
                 "1:1 mentorship sessions every two weeks.",
                 "After the program: internship and industry transition pathways — a pathway, not a promise.",
@@ -168,6 +143,10 @@ export default function ApplyPage() {
             </CtaButton>
           </div>
         </Reveal>
+      </Section>
+
+      <Section label="Select a training track" pattern="dots" id="tracks">
+        <ProgramTracks />
       </Section>
 
       {/* ── The process ──────────────────────────────────────── */}

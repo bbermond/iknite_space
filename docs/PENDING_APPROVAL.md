@@ -17,6 +17,18 @@ safe placeholder framing until confirmed by Bermond.
 | Piscine | **2-week sink-or-swim challenge — added at owner's direction (July 2026)**, framed as "a test of passion, not skill" | Confirm exact piscine dates/format for Cohort 06 |
 | Eligibility | Engineering graduates / final-year internship students (+ self-taught encouraged) — from the current site's published criteria | Confirm wording, esp. whether self-taught applicants are formally eligible |
 
+## Five programme tracks — added October 2026
+
+At the owner's direction, the public homepage, accelerator page, and
+application now list **Software Engineering, DevOps, Cybersecurity, Data
+Analytics, and Design**. The application records the selected track and uses
+general background and work-link fields.
+
+Only the names and brief field descriptions are shown for the five choices.
+Specific curricula, eligibility, tools, mentors, outcomes, and cohort
+availability for DevOps, Cybersecurity, and Data Analytics have not been
+published; confirm those details before adding claims or promising specifics.
+
 ## Design track — added August 2026 ⚠ needs review
 
 The site now reads through two lenses, switched from the header: **code**
