@@ -8,8 +8,8 @@ safe placeholder framing until confirmed by Bermond.
 
 | Item | Currently on site | Needs |
 |---|---|---|
-| Next cohort | "Cohort 06", starts **September 2026**, Buea, in person | Confirm cohort number + exact start date |
-| Application status | **Open** (per instruction to announce the September cohort) | Confirm open vs. opening-soon; set deadline in `content/site.ts` |
+| Next cohort | "Cohort 06", starts **November 7, 2026**, Buea, in person | Confirm cohort number + exact start date |
+| Application status | **Open** (per instruction to announce the November cohort) | Confirm open vs. opening-soon; set deadline in `content/site.ts` |
 | Application deadline | "TBA — apply early" | Real deadline |
 | Seats | "10 seats" (pattern from Cohorts 4–5) | Confirm for Cohort 06 |
 | Tuition / cost | Deliberately not stated; FAQ says "published with the application" | Confirmed tuition/funding model. The old "free until you get a job" and "guaranteed job after a year" claims were **retired** per the brief |

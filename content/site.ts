@@ -17,7 +17,7 @@ export const cohort = {
   /** Displayed everywhere the cohort is referenced. */
   number: "06",
   name: "Cohort 06",
-  start: "September 2026",
+  start: "November 7, 2026",
   location: "Buea, Cameroon",
   format: "In person",
   duration: "6 months",
@@ -32,7 +32,7 @@ export const site = {
   name: "Iknite Space",
   tagline: "Tech Talent Accelerator — Buea, Cameroon",
   description:
-    "A selective six-month accelerator in Buea offering Software Engineering, DevOps, Cybersecurity, Data Analytics, and Design training through real projects, mentorship, and team workflows. Applications open for Cohort 06, starting September 2026.",
+    "A selective six-month accelerator in Buea offering Software Engineering, DevOps, Cybersecurity, Data Analytics, and Design training through real projects, mentorship, and team workflows. Applications open for Cohort 06, starting November 7, 2026.",
   url: "https://iknite.space",
   /**
    * Contact details below are the currently published public ones.

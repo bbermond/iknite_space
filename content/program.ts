@@ -119,7 +119,7 @@ export function getFaqs(track: TrackContent) {
     },
     {
       q: "What does it cost?",
-      a: "Cost and funding details for the September 2026 cohort are published with the application. Ask us directly via the contact page if anything is unclear.",
+      a: "Cost and funding details for the November 2026 cohort are published with the application. Ask us directly via the contact page if anything is unclear.",
     },
     {
       q: "Is it remote?",
